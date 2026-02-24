@@ -68,6 +68,14 @@ const App = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const scrollToWaitlist = () => {
+    setActiveView('home');
+    setTimeout(() => {
+      const element = document.getElementById('waitlist');
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
   
   const [globalIndex, setGlobalIndex] = useState(0);
   const indexA = Math.floor(globalIndex / 3) % SET_A.length;
@@ -175,10 +183,8 @@ const App = () => {
               ].map((item) => (
                 <button 
                   key={item.id} 
-                  onClick={() => setActiveView(item.id)}
-                  className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold ${
-                    activeView === item.id ? 'text-white bg-white/5 shadow-inner' : 'text-slate-500 hover:text-white hover:bg-white/5'
-                  }`}
+                  onClick={() => scrollToWaitlist()}
+                  className="w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold text-slate-500 hover:text-white hover:bg-white/5"
                 >
                   {item.icon}
                   <span className="hidden md:block text-[10px] uppercase tracking-[0.2em]">{item.label}</span>
@@ -191,13 +197,13 @@ const App = () => {
             <span className="px-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 block">Platform</span>
             <div className="space-y-2">
               {[
-                { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
-                { id: 'status', label: 'Status & Health', icon: <Shield size={20} /> },
-                { id: 'integrations', label: 'Integrations', icon: <Zap size={20} /> },
+                { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} />, active: true },
+                { id: 'status', label: 'Status & Health', icon: <Shield size={20} />, active: false },
+                { id: 'integrations', label: 'Integrations', icon: <Zap size={20} />, active: false },
               ].map((item) => (
                 <button 
                   key={item.id} 
-                  onClick={() => setActiveView(item.id)}
+                  onClick={() => item.active ? setActiveView(item.id) : scrollToWaitlist()}
                   className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold ${
                     activeView === item.id ? 'text-white bg-white/5 shadow-inner' : 'text-slate-500 hover:text-white hover:bg-white/5'
                   }`}
@@ -314,9 +320,9 @@ const App = () => {
                   <div className="bg-indigo-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
                     <Activity size={24} />
                   </div>
-                  <h3 className="text-2xl font-black uppercase mb-4 italic tracking-tight">SRE for Life</h3>
+                  <h3 className="text-2xl font-black uppercase mb-4 italic tracking-tight">Life Performance Engineering</h3>
                   <p className="text-slate-400 leading-relaxed font-medium italic">
-                    We are applying the rigor of Site Reliability Engineering to the human experience. Through private telemetry, observability, and intelligent automation, we build lives that don't just "run"—they excel with 99.99% uptime on personal goals.
+                    Assistant, PHD applies high-performance engineering principles to your daily habits. By measuring what actually matters and automating the mundane, we help you achieve peak consistency. It’s about building a "fail-safe" routine where your health, wealth, and work goals are architected for success.
                   </p>
                 </div>
 
@@ -357,11 +363,22 @@ const App = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col items-center justify-center min-h-[80vh] text-center"
+              className="flex flex-col items-center justify-center min-h-[80vh] text-center px-6"
             >
               <Loader2 size={48} className="text-indigo-500 animate-spin mb-6" />
               <h2 className="text-4xl font-black uppercase tracking-tighter italic mb-4">{activeView} System Initializing</h2>
-              <p className="text-slate-500 font-medium italic">The Possibility Engine is architecting this module. <br /> Check back as the roadmap unfolds.</p>
+              <p className="text-slate-500 font-medium italic mb-10">The Possibility Engine is architecting this module. <br /> Check back as the roadmap unfolds.</p>
+              
+              <div className="flex flex-col items-center gap-4">
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">Want early access?</span>
+                <a 
+                  href="#waitlist" 
+                  onClick={() => setActiveView('home')}
+                  className="bg-white/5 hover:bg-white/10 text-white px-10 py-5 rounded-[32px] font-black text-[10px] uppercase tracking-[0.4em] backdrop-blur-md border border-white/10 transition-all hover:scale-105"
+                >
+                  Join the Wishlist
+                </a>
+              </div>
             </motion.div>
           )}
           </AnimatePresence>
