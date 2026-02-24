@@ -183,8 +183,10 @@ const App = () => {
               ].map((item) => (
                 <button 
                   key={item.id} 
-                  onClick={() => scrollToWaitlist()}
-                  className="w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold text-slate-500 hover:text-white hover:bg-white/5"
+                  onClick={() => setActiveView(item.id)}
+                  className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold ${
+                    activeView === item.id ? 'text-white bg-white/5 shadow-inner' : 'text-slate-500 hover:text-white hover:bg-white/5'
+                  }`}
                 >
                   {item.icon}
                   <span className="hidden md:block text-[10px] uppercase tracking-[0.2em]">{item.label}</span>
@@ -197,13 +199,13 @@ const App = () => {
             <span className="px-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 block">Platform</span>
             <div className="space-y-2">
               {[
-                { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} />, active: true },
-                { id: 'status', label: 'Status & Health', icon: <Shield size={20} />, active: false },
-                { id: 'integrations', label: 'Integrations', icon: <Zap size={20} />, active: false },
+                { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
+                { id: 'status', label: 'Status & Health', icon: <Shield size={20} /> },
+                { id: 'integrations', label: 'Integrations', icon: <Zap size={20} /> },
               ].map((item) => (
                 <button 
                   key={item.id} 
-                  onClick={() => item.active ? setActiveView(item.id) : scrollToWaitlist()}
+                  onClick={() => setActiveView(item.id)}
                   className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold ${
                     activeView === item.id ? 'text-white bg-white/5 shadow-inner' : 'text-slate-500 hover:text-white hover:bg-white/5'
                   }`}
