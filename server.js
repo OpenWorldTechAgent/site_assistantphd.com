@@ -2,13 +2,25 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
+const admin = require('firebase-admin');
 
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
+const IS_CLOUD_RUN = !!process.env.K_SERVICE; // Standard Cloud Run env var
 
 // Initialize Database
-const db = new Database('waitlist.db');
-db.prepare('CREATE TABLE IF NOT EXISTS waitlist (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)').run();
+let db = null;
+let firestore = null;
+
+if (IS_CLOUD_RUN) {
+  console.log('Initializing Firestore for Cloud Run...');
+  admin.initializeApp();
+  firestore = admin.firestore();
+} else {
+  console.log('Initializing local SQLite for development...');
+  db = new Database('waitlist.db');
+  db.prepare('CREATE TABLE IF NOT EXISTS waitlist (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)').run();
+}
 
 // Comprehensive MIME type mapping
 // Zero-dependency replacement for 'mime-types'
@@ -78,7 +90,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'POST' && decodedPath === '/api/waitlist') {
     let body = '';
     req.on('data', chunk => { body += chunk.toString(); });
-    req.on('end', () => {
+    req.on('end', async () => {
       try {
         const { email } = JSON.parse(body);
         if (!email) {
@@ -86,13 +98,24 @@ const server = http.createServer(async (req, res) => {
           res.end(JSON.stringify({ error: 'Email is required' }));
           return;
         }
-        const insert = db.prepare('INSERT INTO waitlist (email) VALUES (?)');
-        insert.run(email);
+
+        if (IS_CLOUD_RUN) {
+          // Save to Firestore
+          await firestore.collection('waitlist').doc(email).set({
+            email,
+            created_at: admin.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+        } else {
+          // Save to local SQLite
+          const insert = db.prepare('INSERT INTO waitlist (email) VALUES (?)');
+          insert.run(email);
+        }
+
         res.statusCode = 201;
         res.end(JSON.stringify({ message: 'Success' }));
       } catch (err) {
-        if (err.code === 'SQLITE_CONSTRAINT') {
-          res.statusCode = 200; // Already registered
+        if (err.code === 'SQLITE_CONSTRAINT' || err.code === 6) { // 6 is Firestore ALREADY_EXISTS (if using create)
+          res.statusCode = 200; 
           res.end(JSON.stringify({ message: 'Already registered' }));
         } else {
           console.error('API Error:', err);
