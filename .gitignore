@@ -1,0 +1,8 @@
+node_modules/
+dist/
+assets/
+.env
+.env.local
+.DS_Store
+*.tgz
+site_assistantphd.com_old/
