@@ -165,7 +165,7 @@ const App = () => {
           <div className="bg-indigo-600 p-2 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
             <Brain size={24} className="text-white" />
           </div>
-          <div className="hidden md:block overflow-hidden">
+          <div className="hidden md:block pr-1">
             <span className="font-black text-lg block leading-none uppercase tracking-tighter italic whitespace-nowrap">Assistant, PhD</span>
             <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-1 block">Autonomous Agent</span>
           </div>
@@ -173,13 +173,12 @@ const App = () => {
         
         <nav className="p-6 space-y-8">
           <div>
-            <span className="px-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 block">Your</span>
+            <span className="px-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 block">Platform</span>
             <div className="space-y-2">
               {[
-                { id: 'insights', label: 'Insights', icon: <BarChart3 size={20} /> },
-                { id: 'vision', label: 'Vision', icon: <Eye size={20} /> },
-                { id: 'economy', label: 'Economy', icon: <Coins size={20} /> },
-                { id: 'vault', label: 'Vault Data', icon: <Lock size={20} /> },
+                { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
+                { id: 'status', label: 'Status & Health', icon: <Shield size={20} /> },
+                { id: 'integrations', label: 'Integrations', icon: <Zap size={20} /> },
               ].map((item) => (
                 <button 
                   key={item.id} 
@@ -196,12 +195,13 @@ const App = () => {
           </div>
 
           <div>
-            <span className="px-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 block">Platform</span>
+            <span className="px-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 block">Your</span>
             <div className="space-y-2">
               {[
-                { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
-                { id: 'status', label: 'Status & Health', icon: <Shield size={20} /> },
-                { id: 'integrations', label: 'Integrations', icon: <Zap size={20} /> },
+                { id: 'insights', label: 'Insights', icon: <BarChart3 size={20} /> },
+                { id: 'vision', label: 'Vision', icon: <Eye size={20} /> },
+                { id: 'economy', label: 'Economy', icon: <Coins size={20} /> },
+                { id: 'vault', label: 'Vault Data', icon: <Lock size={20} /> },
               ].map((item) => (
                 <button 
                   key={item.id} 
