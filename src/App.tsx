@@ -165,9 +165,9 @@ const App = () => {
           <div className="bg-indigo-600 p-2 rounded-xl shadow-lg group-hover:scale-110 transition-transform">
             <Brain size={24} className="text-white" />
           </div>
-          <div className="hidden md:block">
-            <span className="font-black text-lg block leading-none uppercase tracking-tighter italic">Assistant, PHD</span>
-            <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-1">Autonomous</span>
+          <div className="hidden md:block overflow-hidden">
+            <span className="font-black text-lg block leading-none uppercase tracking-tighter italic whitespace-nowrap">Assistant, PhD</span>
+            <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-1 block">Autonomous Agent</span>
           </div>
         </div>
         
