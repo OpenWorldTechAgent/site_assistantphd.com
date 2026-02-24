@@ -1,0 +1,7 @@
+node_modules/
+dist/
+assets/
+.git
+.env
+.env.local
+site_assistantphd.com_old/
