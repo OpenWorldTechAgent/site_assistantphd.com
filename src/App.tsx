@@ -281,21 +281,35 @@ const App = () => {
                  <div className="bg-indigo-600 rounded-[80px] p-12 md:p-32 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-60" />
                     <div className="relative z-10 max-w-4xl mx-auto">
-                       <h2 className="text-6xl md:text-9xl font-black text-white mb-10 uppercase tracking-tighter leading-[0.8] italic">Own Your <br /> Future.</h2>
-                       {!isSubmitted ? (
-                          <form onSubmit={(e) => { e.preventDefault(); setIsSubmitted(true); }} className="flex flex-col md:flex-row gap-4 p-4 bg-white/10 backdrop-blur-3xl rounded-[48px] border border-white/20 shadow-2xl max-w-3xl mx-auto">
-                             <input 
-                               type="email" 
-                               required
-                               placeholder="Enter your email address"
-                               value={waitlistEmail}
-                               onChange={(e) => setWaitlistEmail(e.target.value)}
-                               className="flex-1 bg-transparent border-none py-6 px-10 text-white placeholder:text-indigo-300 font-bold text-xl outline-none focus:ring-0"
-                             />
-                             <button type="submit" className="bg-white text-indigo-700 px-16 py-6 rounded-[40px] font-black text-sm uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-4 active:scale-95">Join the Waitlist <ChevronRight size={20} /></button>
-                          </form>
-                       ) : (
-                          <div className="bg-white/10 p-12 rounded-[48px] border border-white/20 backdrop-blur-2xl text-center">
+                                        <h2 className="text-6xl md:text-9xl font-black text-white mb-10 uppercase tracking-tighter leading-[0.8] italic">Own Your <br /> Future.</h2>
+                                        {!isSubmitted ? (
+                                           <form 
+                                             onSubmit={async (e) => { 
+                                               e.preventDefault(); 
+                                               try {
+                                                 await fetch('/api/waitlist', {
+                                                   method: 'POST',
+                                                   headers: { 'Content-Type': 'application/json' },
+                                                   body: JSON.stringify({ email: waitlistEmail })
+                                                 });
+                                               } catch (err) {
+                                                 console.error('Waitlist submission failed:', err);
+                                               }
+                                               setIsSubmitted(true); 
+                                             }} 
+                                             className="flex flex-col md:flex-row gap-4 p-4 bg-white/10 backdrop-blur-3xl rounded-[48px] border border-white/20 shadow-2xl max-w-3xl mx-auto"
+                                           >
+                                              <input 
+                                                type="email" 
+                                                required
+                                                placeholder="Enter your email address"
+                                                value={waitlistEmail}
+                                                onChange={(e) => setWaitlistEmail(e.target.value)}
+                                                className="flex-1 bg-transparent border-none py-6 px-10 text-white placeholder:text-indigo-300 font-bold text-xl outline-none focus:ring-0"
+                                              />
+                                              <button type="submit" className="bg-white text-indigo-700 px-16 py-6 rounded-[40px] font-black text-sm uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-4 active:scale-95">Join the Waitlist <ChevronRight size={20} /></button>
+                                           </form>
+                                        ) : (                          <div className="bg-white/10 p-12 rounded-[48px] border border-white/20 backdrop-blur-2xl text-center">
                              <ShieldCheck size={80} className="text-emerald-400 mx-auto mb-6" />
                              <h4 className="text-4xl font-black text-white mb-4 uppercase italic">Identity Indexed.</h4>
                              <p className="text-indigo-200 font-bold uppercase tracking-widest text-sm italic">Genesis node activation pending. Welcome to the frontier.</p>

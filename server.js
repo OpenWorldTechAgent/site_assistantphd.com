@@ -1,9 +1,14 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const Database = require('better-sqlite3');
 
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
+
+// Initialize Database
+const db = new Database('waitlist.db');
+db.prepare('CREATE TABLE IF NOT EXISTS waitlist (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)').run();
 
 // Comprehensive MIME type mapping
 // Zero-dependency replacement for 'mime-types'
@@ -68,6 +73,36 @@ const server = http.createServer(async (req, res) => {
   const requestUrl = new URL(req.url, 'http://localhost');
   const decodedPath = decodeURIComponent(requestUrl.pathname);
   const absolutePath = path.join(ROOT, decodedPath);
+
+  // --- API Routes ---
+  if (req.method === 'POST' && decodedPath === '/api/waitlist') {
+    let body = '';
+    req.on('data', chunk => { body += chunk.toString(); });
+    req.on('end', () => {
+      try {
+        const { email } = JSON.parse(body);
+        if (!email) {
+          res.statusCode = 400;
+          res.end(JSON.stringify({ error: 'Email is required' }));
+          return;
+        }
+        const insert = db.prepare('INSERT INTO waitlist (email) VALUES (?)');
+        insert.run(email);
+        res.statusCode = 201;
+        res.end(JSON.stringify({ message: 'Success' }));
+      } catch (err) {
+        if (err.code === 'SQLITE_CONSTRAINT') {
+          res.statusCode = 200; // Already registered
+          res.end(JSON.stringify({ message: 'Already registered' }));
+        } else {
+          console.error('API Error:', err);
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: 'Internal Server Error' }));
+        }
+      }
+    });
+    return;
+  }
 
   // Trying to access outside the folder
   if (!absolutePath.startsWith(ROOT + path.sep)) {
