@@ -174,9 +174,9 @@ const App = () => {
           </div>
         </div>
         
-        <nav className="p-6 space-y-8">
+        <nav className="p-6 space-y-10">
           <div>
-            <span className="px-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 block">Platform</span>
+            <span className="px-3 text-[14px] font-black text-slate-500 uppercase tracking-[0.3em] mb-6 block border-l-2 border-indigo-500/30">Platform</span>
             <div className="space-y-2">
               {[
                 { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
@@ -191,14 +191,14 @@ const App = () => {
                   }`}
                 >
                   {item.icon}
-                  <span className="hidden md:block text-[10px] uppercase tracking-[0.2em]">{item.label}</span>
+                  <span className="hidden md:block text-[11px] uppercase tracking-[0.2em]">{item.label}</span>
                 </button>
               ))}
             </div>
           </div>
 
           <div>
-            <span className="px-3 text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 block">Your</span>
+            <span className="px-3 text-[14px] font-black text-slate-500 uppercase tracking-[0.3em] mb-6 block border-l-2 border-indigo-500/30">Your</span>
             <div className="space-y-2">
               {[
                 { id: 'insights', label: 'Insights', icon: <BarChart3 size={20} /> },
@@ -216,7 +216,7 @@ const App = () => {
                   }`}
                 >
                   {item.icon}
-                  <span className="hidden md:block text-[10px] uppercase tracking-[0.2em]">{item.label}</span>
+                  <span className="hidden md:block text-[11px] uppercase tracking-[0.2em]">{item.label}</span>
                 </button>
               ))}
             </div>
