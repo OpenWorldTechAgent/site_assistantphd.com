@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Activity, Moon, Zap, User, Upload, MessageSquare, ShieldCheck, Lock,
+  Activity, Moon, User, Upload, MessageSquare, ShieldCheck, Lock,
   Clock, Heart, Brain, Sparkles, Server, Cpu, Globe, Database, Layers,
   Wand2, UserCircle, Coins, TrendingUp, CpuIcon, ArrowRightLeft, 
   Check, Box, Maximize2, Share2, Users2, RefreshCw, Eye, Mic, 
