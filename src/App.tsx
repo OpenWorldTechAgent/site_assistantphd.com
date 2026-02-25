@@ -9,7 +9,7 @@ import {
   ChevronRight, Mail, Bell, DollarSign, ArrowUpRight, Sparkle, X, 
   Loader2, Camera, AlertTriangle, Map, BarChart3, Rocket, Shield,
   Send, MessageCircle, Slack, Github, Calendar, Music, HardDrive, 
-  Circle, CheckCircle2, XCircle, Share
+  Circle, CheckCircle, XCircle, Share, Dumbbell, Youtube, Terminal, Zap
 } from 'lucide-react';
 
 // --- Gemini API Configuration ---
@@ -180,7 +180,7 @@ const App = () => {
               {[
                 { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
                 { id: 'status', label: 'Status & Health', icon: <Shield size={20} /> },
-                { id: 'platform-integrations', label: 'System Integrations', icon: <Zap size={20} /> },
+                { id: 'platform-integrations', label: 'System Integrations', icon: <Activity size={20} /> },
               ].map((item) => (
                 <button 
                   key={item.id} 
@@ -203,8 +203,9 @@ const App = () => {
                 { id: 'insights', label: 'Insights', icon: <BarChart3 size={20} /> },
                 { id: 'vision', label: 'Vision', icon: <Eye size={20} /> },
                 { id: 'economy', label: 'Economy', icon: <Coins size={20} /> },
+                { id: 'activity', label: 'Activity & Fitness', icon: <Dumbbell size={20} /> },
                 { id: 'vault', label: 'Vault Data', icon: <Lock size={20} /> },
-                { id: 'user-integrations', label: 'Connections', icon: <PlugZap size={20} /> },
+                { id: 'user-integrations', label: 'Connections', icon: <Zap size={20} /> },
               ].map((item) => (
                 <button 
                   key={item.id} 
@@ -395,6 +396,7 @@ const App = () => {
                       { name: "Telegram", icon: <Send size={24} />, status: "connected", color: "text-sky-400" },
                       { name: "WhatsApp", icon: <MessageCircle size={24} />, status: "disconnected", color: "text-emerald-500" },
                       { name: "Slack", icon: <Slack size={24} />, status: "connected", color: "text-purple-400" },
+                      { name: "Google Chat", icon: <MessageCircle size={24} />, status: "disconnected", color: "text-blue-400" },
                       { name: "Discord", icon: <MessageCircle size={24} />, status: "disconnected", color: "text-indigo-400" },
                     ]
                   },
@@ -403,6 +405,7 @@ const App = () => {
                     items: [
                       { name: "Google Drive", icon: <HardDrive size={24} />, status: "connected", color: "text-yellow-500" },
                       { name: "Gmail", icon: <Mail size={24} />, status: "connected", color: "text-red-400" },
+                      { name: "YouTube Music", icon: <Youtube size={24} />, status: "disconnected", color: "text-red-600" },
                       { name: "GitHub", icon: <Github size={24} />, status: "disconnected", color: "text-slate-100" },
                       { name: "Notion", icon: <Share size={24} />, status: "disconnected", color: "text-slate-100" },
                     ]
@@ -470,6 +473,7 @@ const App = () => {
                     items: [
                       { name: "Google AI", icon: <Brain size={24} />, status: "operational", color: "text-blue-400" },
                       { name: "Groq", icon: <Cpu size={24} />, status: "operational", color: "text-orange-400" },
+                      { name: "Claude Code", icon: <Terminal size={24} />, status: "operational", color: "text-orange-500" },
                       { name: "Hugging Face", icon: <Share size={24} />, status: "operational", color: "text-yellow-400" },
                       { name: "X.AI", icon: <Zap size={24} />, status: "standby", color: "text-indigo-400" },
                     ]
