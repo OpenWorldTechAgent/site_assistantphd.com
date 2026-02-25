@@ -16,6 +16,7 @@ show_help() {
     echo "  stop      Stop the running development server"
     echo "  restart   Stop and then start the development server"
     echo "  status    Check if the development server is currently running"
+    echo "  logs      Tail the development server logs"
     echo "  --help    Show this help message"
     echo ""
     echo "Options:"
@@ -151,6 +152,15 @@ case $COMMAND in
         ;;
     status)
         show_status
+        ;;
+    logs)
+        if [ -f "$LOG_FILE" ]; then
+            echo "Tailing logs from $LOG_FILE (Ctrl+C to stop)..."
+            tail -f "$LOG_FILE"
+        else
+            echo "Error: Log file not found at $LOG_FILE"
+            exit 1
+        fi
         ;;
     --help|help)
         show_help
