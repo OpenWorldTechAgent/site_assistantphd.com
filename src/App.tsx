@@ -240,21 +240,20 @@ const App = () => {
         <div className="relative min-h-screen">
           <AnimatePresence mode="wait">
             {activeView === 'home' && (
-              <motion.div
-                key="home"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-              >
-                {/* Hero Section: The Possibility Engine */}
-                <section className="px-6 md:px-12 py-16 md:py-32 flex flex-col items-center md:items-start text-center md:text-left relative min-h-[75vh] justify-center">
-                  <div className="flex items-center gap-2 mb-10 bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-xl w-fit relative z-10">
-                    <Sparkles size={16} className="text-indigo-400" />
+                          <motion.div
+                            key="home"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            {/* Hero Section: The Possibility Engine */}
+                            <section className="px-6 md:px-12 py-8 md:py-20 flex flex-col items-center md:items-start text-center md:text-left relative min-h-[60vh] justify-center">
+                              <div className="flex items-center gap-2 mb-6 bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-xl w-fit relative z-10">                    <Sparkles size={16} className="text-indigo-400" />
                     <p className="font-black text-[10px] uppercase tracking-[0.4em]">One Platform. Infinite Possibilities.</p>
                   </div>
 
-                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1] uppercase mb-12 relative z-10 select-none">
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1] uppercase mb-8 relative z-10 select-none">
                     What will you <br />
                     {/* Top Carousel (Slow) */}
                     <RollingSlot items={SET_A} currentIndex={indexA} activeColor="text-indigo-500" />
@@ -267,7 +266,7 @@ const App = () => {
                     <RollingSlot items={SET_B} currentIndex={indexB} activeColor="text-purple-400" />
                   </h1>
 
-                  <p className="text-base md:text-xl text-slate-400 max-w-5xl leading-relaxed mb-16 relative z-10 font-medium italic">
+                  <p className="text-base md:text-xl text-slate-400 max-w-5xl leading-relaxed mb-10 relative z-10 font-medium italic">
                     Distilling your realtime data and telemetry into actionable insights and real-world results.
                     <span className="text-indigo-400 block mt-2">Private AI for your health, wealth, work and home.</span>
                   </p>
