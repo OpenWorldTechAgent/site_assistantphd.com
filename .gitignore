@@ -7,3 +7,4 @@ assets/
 *.tgz
 site_assistantphd.com_old/
 scripts/deploy*
+\n# Database and local logs\nwaitlist.db\nscripts/*.log\nscripts/*.pid\n*.log

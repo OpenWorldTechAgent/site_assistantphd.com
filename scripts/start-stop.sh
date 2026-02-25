@@ -5,124 +5,81 @@ cd "$(dirname "$0")/.."
 SCRIPT_DIR="scripts"
 PID_FILE="$SCRIPT_DIR/dev.pid"
 LOG_FILE="$SCRIPT_DIR/dev.log"
+API_PID_FILE="$SCRIPT_DIR/api.pid"
+API_LOG_FILE="$SCRIPT_DIR/api.log"
 PORT=3001
+API_PORT=3000
 FORCE=false
 
 show_help() {
     echo "Usage: ./scripts/start-stop.sh [COMMAND] [OPTIONS]"
     echo ""
     echo "Commands:"
-    echo "  start     Start the local development server (Vite) on port $PORT"
-    echo "  stop      Stop the running development server"
-    echo "  restart   Stop and then start the development server"
-    echo "  status    Check if the development server is currently running"
-    echo "  logs      Tail the development server logs"
+    echo "  start     Start the Vite server (port $PORT) and API server (port $API_PORT)"
+    echo "  stop      Stop both servers"
+    echo "  restart   Restart both servers"
+    echo "  status    Check status of both servers"
+    echo "  logs      Tail Vite logs"
+    echo "  api-logs  Tail API logs"
     echo "  --help    Show this help message"
-    echo ""
-    echo "Options:"
-    echo "  -p, --port PORT    Override the default port (default: $PORT)"
-    echo "  -f, --force        Force start by killing any process on the target port"
 }
 
 start_server() {
-    # Check if the port is already in use by ANY process
-    PORT_PID=$(lsof -t -i :$PORT)
-    if [ ! -z "$PORT_PID" ]; then
-        if [ "$FORCE" = true ]; then
-            echo "Port $PORT is occupied by PID(s): $PORT_PID. Force killing..."
-            echo "$PORT_PID" | xargs kill -9
-            sleep 1
-        else
-            echo "Error: Port $PORT is already in use by PID(s): $PORT_PID."
-            echo "Use --force or -f to kill the existing process and start."
-            exit 1
+    # Check if ports are already in use
+    for p in $PORT $API_PORT; do
+        PORT_PID=$(lsof -t -i :$p)
+        if [ ! -z "$PORT_PID" ]; then
+            if [ "$FORCE" = true ]; then
+                echo "Port $p is occupied. Force killing PID(s): $PORT_PID..."
+                echo "$PORT_PID" | xargs kill -9
+                sleep 1
+            else
+                echo "Error: Port $p is already in use by PID(s): $PORT_PID. Use --force."
+                exit 1
+            fi
         fi
-    fi
-
-    # Check for our specific PID file
-    if [ -f "$PID_FILE" ]; then
-        PID=$(cat "$PID_FILE")
-        if ps -p $PID > /dev/null; then
-            echo "Server is already running (PID: $PID) at http://localhost:$PORT"
-            exit 0
-        else
-            echo "Removing stale PID file..."
-            rm "$PID_FILE"
-        fi
-    fi
-
-    echo "Starting development server on port $PORT..."
-    # Run vite in the background and redirect output to log file
-    # Using --strictPort to ensure it doesn't jump to another port if busy
-    npx vite --port $PORT --host localhost --strictPort > "$LOG_FILE" 2>&1 &
-    
-    NEW_PID=$!
-    echo $NEW_PID > "$PID_FILE"
-    
-    # Give it a few seconds to initialize and check if it's actually listening
-    echo "Verifying server is listening on port $PORT..."
-    MAX_RETRIES=10
-    RETRY_COUNT=0
-    SUCCESS=false
-
-    while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-        if lsof -t -i :$PORT > /dev/null; then
-            SUCCESS=true
-            break
-        fi
-        sleep 1
-        ((RETRY_COUNT++))
     done
+
+    # Start API Server
+    echo "Starting API server on port $API_PORT..."
+    PORT=$API_PORT node server.js > "$API_LOG_FILE" 2>&1 &
+    echo $! > "$API_PID_FILE"
+
+    # Start Vite Server
+    echo "Starting Vite server on port $PORT..."
+    npx vite --port $PORT --host localhost --strictPort > "$LOG_FILE" 2>&1 &
+    echo $! > "$PID_FILE"
     
-    if [ "$SUCCESS" = true ]; then
-        echo "Server started successfully (PID: $NEW_PID)."
-        echo "URL: http://localhost:$PORT"
-        echo "Logs: $LOG_FILE"
-    else
-        echo "Error: Server process started but is not listening on port $PORT after $MAX_RETRIES seconds."
-        echo "Check $LOG_FILE for details."
-        # Clean up the process if it's still hanging around
-        kill $NEW_PID 2>/dev/null
-        rm "$PID_FILE"
-        exit 1
-    fi
+    echo "Servers started successfully."
+    echo "Frontend: http://localhost:$PORT"
+    echo "API:      http://localhost:$API_PORT"
 }
 
 stop_server() {
-    if [ ! -f "$PID_FILE" ]; then
-        echo "No PID file found. Is the server running?"
-        exit 0
-    fi
-
-    PID=$(cat "$PID_FILE")
-    if ps -p $PID > /dev/null; then
-        echo "Stopping server (PID: $PID)..."
-        kill $PID
-        rm "$PID_FILE"
-        echo "Server stopped."
-    else
-        echo "Server was not running (stale PID file removed)."
-        rm "$PID_FILE"
-    fi
+    for f in "$PID_FILE" "$API_PID_FILE"; do
+        if [ -f "$f" ]; then
+            PID=$(cat "$f")
+            if ps -p $PID > /dev/null; then
+                echo "Stopping process $PID..."
+                kill $PID
+            fi
+            rm "$f"
+        fi
+    done
+    echo "Servers stopped."
 }
 
 show_status() {
-    if [ -f "$PID_FILE" ]; then
-        PID=$(cat "$PID_FILE")
-        if ps -p $PID > /dev/null; then
-            echo "Status: RUNNING (PID: $PID)"
-            echo "URL:    http://localhost:$PORT"
-        else
-            echo "Status: STOPPED (Stale PID file exists)"
-        fi
+    if [ -f "$PID_FILE" ] && ps -p $(cat "$PID_FILE") > /dev/null; then
+        echo "Vite:  RUNNING (PID: $(cat "$PID_FILE")) on http://localhost:$PORT"
     else
-        # Also check if something else is on the port
-        PORT_PID=$(lsof -t -i :$PORT)
-        if [ ! -z "$PORT_PID" ]; then
-            echo "Status: STOPPED (But port $PORT is occupied by PID: $PORT_PID)"
-        else
-            echo "Status: STOPPED"
-        fi
+        echo "Vite:  STOPPED"
+    fi
+
+    if [ -f "$API_PID_FILE" ] && ps -p $(cat "$API_PID_FILE") > /dev/null; then
+        echo "API:   RUNNING (PID: $(cat "$API_PID_FILE")) on http://localhost:$API_PORT"
+    else
+        echo "API:   STOPPED"
     fi
 }
 
@@ -159,6 +116,15 @@ case $COMMAND in
             tail -f "$LOG_FILE"
         else
             echo "Error: Log file not found at $LOG_FILE"
+            exit 1
+        fi
+        ;;
+    api-logs)
+        if [ -f "$API_LOG_FILE" ]; then
+            echo "Tailing API logs from $API_LOG_FILE (Ctrl+C to stop)..."
+            tail -f "$API_LOG_FILE"
+        else
+            echo "Error: API log file not found at $API_LOG_FILE"
             exit 1
         fi
         ;;

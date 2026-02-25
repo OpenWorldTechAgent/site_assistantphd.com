@@ -71,6 +71,8 @@ const App = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const scrollToWaitlist = () => {
     setActiveView('home');
@@ -80,6 +82,32 @@ const App = () => {
     }, 100);
   };
   
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage('');
+    
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: waitlistEmail })
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        const data = await response.json().catch(() => ({}));
+        setErrorMessage(data.error || 'Registration failed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Waitlist submission failed:', err);
+      setErrorMessage('Network error. Is the API server running?');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const [globalIndex, setGlobalIndex] = useState(0);
   const indexA = Math.floor(globalIndex / 3) % SET_A.length;
   const indexB = globalIndex % SET_B.length;
@@ -288,32 +316,36 @@ const App = () => {
                     <div className="relative z-10 max-w-4xl mx-auto">
                                         <h2 className="text-4xl md:text-7xl font-black text-white mb-10 uppercase tracking-tighter leading-[0.8] italic">Own Your <br /> Future.</h2>
                                         {!isSubmitted ? (
-                                           <form 
-                                             onSubmit={async (e) => { 
-                                               e.preventDefault(); 
-                                               try {
-                                                 await fetch('/api/waitlist', {
-                                                   method: 'POST',
-                                                   headers: { 'Content-Type': 'application/json' },
-                                                   body: JSON.stringify({ email: waitlistEmail })
-                                                 });
-                                               } catch (err) {
-                                                 console.error('Waitlist submission failed:', err);
-                                               }
-                                               setIsSubmitted(true); 
-                                             }} 
-                                             className="flex flex-col md:flex-row gap-4 p-4 bg-white/10 backdrop-blur-3xl rounded-[48px] border border-white/20 shadow-2xl max-w-3xl mx-auto"
-                                           >
-                                              <input 
-                                                type="email" 
-                                                required
-                                                placeholder="Enter your email address"
-                                                value={waitlistEmail}
-                                                onChange={(e) => setWaitlistEmail(e.target.value)}
-                                                className="flex-1 bg-transparent border-none py-6 px-10 text-white placeholder:text-indigo-300 font-bold text-xl outline-none focus:ring-0"
-                                              />
-                                              <button type="submit" className="bg-white text-indigo-700 px-16 py-6 rounded-[40px] font-black text-sm uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-4 active:scale-95">Join the Waitlist <ChevronRight size={20} /></button>
-                                           </form>
+                                           <div className="max-w-3xl mx-auto">
+                                             <form 
+                                               onSubmit={handleWaitlistSubmit} 
+                                               className="flex flex-col md:flex-row gap-4 p-4 bg-white/10 backdrop-blur-3xl rounded-[48px] border border-white/20 shadow-2xl"
+                                             >
+                                                <input 
+                                                  type="email" 
+                                                  required
+                                                  disabled={isSubmitting}
+                                                  placeholder="Enter your email address"
+                                                  value={waitlistEmail}
+                                                  onChange={(e) => setWaitlistEmail(e.target.value)}
+                                                  className="flex-1 bg-transparent border-none py-6 px-10 text-white placeholder:text-indigo-300 font-bold text-xl outline-none focus:ring-0 disabled:opacity-50"
+                                                />
+                                                <button 
+                                                  type="submit" 
+                                                  disabled={isSubmitting}
+                                                  className="bg-white text-indigo-700 px-16 py-6 rounded-[40px] font-black text-sm uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-4 active:scale-95 disabled:opacity-50"
+                                                >
+                                                  {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : 'Join the Waitlist'} 
+                                                  {!isSubmitting && <ChevronRight size={20} />}
+                                                </button>
+                                             </form>
+                                             {errorMessage && (
+                                               <div className="mt-6 flex items-center justify-center gap-2 text-red-400 font-bold uppercase tracking-widest text-xs italic bg-red-400/10 py-3 px-6 rounded-2xl border border-red-400/20">
+                                                 <AlertTriangle size={14} />
+                                                 {errorMessage}
+                                               </div>
+                                             )}
+                                           </div>
                                         ) : (                          <div className="bg-white/10 p-12 rounded-[48px] border border-white/20 backdrop-blur-2xl text-center">
                              <ShieldCheck size={80} className="text-emerald-400 mx-auto mb-6" />
                              <h4 className="text-2xl md:text-4xl font-black text-white mb-4 uppercase italic">Identity Indexed.</h4>
@@ -441,29 +473,29 @@ const App = () => {
                     category: "Communication",
                     items: [
                       { name: "Telegram", icon: <Send size={24} />, status: "connected", color: "text-sky-400" },
-                      { name: "WhatsApp", icon: <MessageCircle size={24} />, status: "disconnected", color: "text-emerald-500" },
-                      { name: "Slack", icon: <Slack size={24} />, status: "connected", color: "text-purple-400" },
-                      { name: "Google Chat", icon: <MessageCircle size={24} />, status: "disconnected", color: "text-blue-400" },
-                      { name: "Discord", icon: <MessageCircle size={24} />, status: "disconnected", color: "text-indigo-400" },
+                      { name: "WhatsApp", icon: <MessageCircle size={24} />, status: "connected", color: "text-emerald-500" },
+                      { name: "Slack", icon: <Slack size={24} />, status: "planned", color: "text-purple-400" },
+                      { name: "Google Chat", icon: <MessageCircle size={24} />, status: "planned", color: "text-blue-400" },
+                      { name: "Discord", icon: <MessageCircle size={24} />, status: "planned", color: "text-indigo-400" },
                     ]
                   },
                   {
                     category: "Productivity",
                     items: [
-                      { name: "Google Drive", icon: <HardDrive size={24} />, status: "connected", color: "text-yellow-500" },
-                      { name: "Gmail", icon: <Mail size={24} />, status: "connected", color: "text-red-400" },
-                      { name: "YouTube Music", icon: <Youtube size={24} />, status: "disconnected", color: "text-red-600" },
-                      { name: "GitHub", icon: <Github size={24} />, status: "disconnected", color: "text-slate-100" },
-                      { name: "Notion", icon: <Share size={24} />, status: "disconnected", color: "text-slate-100" },
+                      { name: "Google Drive", icon: <HardDrive size={24} />, status: "planned", color: "text-yellow-500" },
+                      { name: "Gmail", icon: <Mail size={24} />, status: "planned", color: "text-red-400" },
+                      { name: "YouTube Music", icon: <Youtube size={24} />, status: "planned", color: "text-red-600" },
+                      { name: "GitHub", icon: <Github size={24} />, status: "planned", color: "text-slate-100" },
+                      { name: "Notion", icon: <Share size={24} />, status: "planned", color: "text-slate-100" },
                     ]
                   },
                   {
                     category: "Life & Performance",
                     items: [
-                      { name: "Google Calendar", icon: <Calendar size={24} />, status: "connected", color: "text-blue-400" },
-                      { name: "Apple Health", icon: <Activity size={24} />, status: "disconnected", color: "text-pink-500" },
-                      { name: "Samsung Health", icon: <Activity size={24} />, status: "disconnected", color: "text-orange-500" },
-                      { name: "Spotify", icon: <Music size={24} />, status: "disconnected", color: "text-emerald-400" },
+                      { name: "Google Calendar", icon: <Calendar size={24} />, status: "planned", color: "text-blue-400" },
+                      { name: "Apple Health", icon: <Activity size={24} />, status: "planned", color: "text-pink-500" },
+                      { name: "Samsung Health", icon: <Activity size={24} />, status: "planned", color: "text-orange-500" },
+                      { name: "Spotify", icon: <Music size={24} />, status: "planned", color: "text-emerald-400" },
                     ]
                   }
                 ].map((group) => (
@@ -479,7 +511,13 @@ const App = () => {
                           
                           <div className="mt-auto w-full space-y-4">
                             <div className="flex items-center justify-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${item.status === 'connected' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' : 'bg-red-500'}`} />
+                              <div className={`w-2 h-2 rounded-full ${
+                                item.status === 'connected' 
+                                  ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' 
+                                  : item.status === 'planned'
+                                    ? 'bg-yellow-500'
+                                    : 'bg-red-500'
+                              }`} />
                               <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
                                 {item.status}
                               </span>
@@ -519,10 +557,10 @@ const App = () => {
                     category: "Intelligence Layers",
                     items: [
                       { name: "Google AI", icon: <Brain size={24} />, status: "operational", color: "text-blue-400" },
-                      { name: "Groq", icon: <Cpu size={24} />, status: "operational", color: "text-orange-400" },
-                      { name: "Claude Code", icon: <Terminal size={24} />, status: "operational", color: "text-orange-500" },
-                      { name: "Hugging Face", icon: <Share size={24} />, status: "operational", color: "text-yellow-400" },
-                      { name: "X.AI", icon: <Zap size={24} />, status: "standby", color: "text-indigo-400" },
+                      { name: "Groq", icon: <Cpu size={24} />, status: "planned", color: "text-orange-400" },
+                      { name: "Claude Code", icon: <Terminal size={24} />, status: "planned", color: "text-orange-500" },
+                      { name: "Hugging Face", icon: <Share size={24} />, status: "planned", color: "text-yellow-400" },
+                      { name: "X.AI", icon: <Zap size={24} />, status: "planned", color: "text-indigo-400" },
                     ]
                   },
                   {
@@ -530,7 +568,7 @@ const App = () => {
                     items: [
                       { name: "Cloud Run", icon: <Server size={24} />, status: "operational", color: "text-blue-500" },
                       { name: "Firestore", icon: <Database size={24} />, status: "operational", color: "text-orange-500" },
-                      { name: "Vector Vault", icon: <ShieldCheck size={24} />, status: "operational", color: "text-emerald-500" },
+                      { name: "Vector Vault", icon: <ShieldCheck size={24} />, status: "planned", color: "text-emerald-500" },
                     ]
                   }
                 ].map((group) => (
