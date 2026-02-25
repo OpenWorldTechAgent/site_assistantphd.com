@@ -411,6 +411,7 @@ const App = () => {
                     items: [
                       { name: "Google Calendar", icon: <Calendar size={24} />, status: "connected", color: "text-blue-400" },
                       { name: "Apple Health", icon: <Activity size={24} />, status: "disconnected", color: "text-pink-500" },
+                      { name: "Samsung Health", icon: <Activity size={24} />, status: "disconnected", color: "text-orange-500" },
                       { name: "Spotify", icon: <Music size={24} />, status: "disconnected", color: "text-emerald-400" },
                     ]
                   }
