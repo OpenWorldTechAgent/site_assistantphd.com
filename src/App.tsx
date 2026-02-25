@@ -248,20 +248,20 @@ const App = () => {
                     <p className="font-black text-[10px] uppercase tracking-[0.4em]">One Platform. Infinite Possibilities.</p>
                   </div>
 
-                  <h1 className="text-5xl md:text-8xl lg:text-[8.5rem] font-black tracking-tighter leading-[1] uppercase mb-12 relative z-10 select-none">
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1] uppercase mb-12 relative z-10 select-none">
                     What will you <br />
                     {/* Top Carousel (Slow) */}
                     <RollingSlot items={SET_A} currentIndex={indexA} activeColor="text-indigo-500" />
                     <br />
                     {/* Brighter Connecting Text */}
-                    <span className="text-slate-100 text-3xl md:text-5xl lg:text-6xl block my-6 font-mono italic normal-case tracking-tight opacity-100">
+                    <span className="text-slate-100 text-xl md:text-3xl lg:text-4xl block my-6 font-mono italic normal-case tracking-tight opacity-100">
                       with your personal Assistant, PhD?
                     </span>
                     {/* Bottom Carousel (Fast) */}
                     <RollingSlot items={SET_B} currentIndex={indexB} activeColor="text-purple-400" />
                   </h1>
 
-                  <p className="text-lg md:text-2xl text-slate-400 max-w-5xl leading-relaxed mb-16 relative z-10 font-medium italic">
+                  <p className="text-base md:text-xl text-slate-400 max-w-5xl leading-relaxed mb-16 relative z-10 font-medium italic">
                     Distilling your realtime data and telemetry into actionable insights and real-world results.
                     <span className="text-indigo-400 block mt-2">Private AI for your health, wealth, work and home.</span>
                   </p>
@@ -281,7 +281,7 @@ const App = () => {
                  <div className="bg-indigo-600 rounded-[80px] p-12 md:p-32 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-60" />
                     <div className="relative z-10 max-w-4xl mx-auto">
-                                        <h2 className="text-6xl md:text-9xl font-black text-white mb-10 uppercase tracking-tighter leading-[0.8] italic">Own Your <br /> Future.</h2>
+                                        <h2 className="text-4xl md:text-7xl font-black text-white mb-10 uppercase tracking-tighter leading-[0.8] italic">Own Your <br /> Future.</h2>
                                         {!isSubmitted ? (
                                            <form 
                                              onSubmit={async (e) => { 
@@ -311,7 +311,7 @@ const App = () => {
                                            </form>
                                         ) : (                          <div className="bg-white/10 p-12 rounded-[48px] border border-white/20 backdrop-blur-2xl text-center">
                              <ShieldCheck size={80} className="text-emerald-400 mx-auto mb-6" />
-                             <h4 className="text-4xl font-black text-white mb-4 uppercase italic">Identity Indexed.</h4>
+                             <h4 className="text-2xl md:text-4xl font-black text-white mb-4 uppercase italic">Identity Indexed.</h4>
                              <p className="text-indigo-200 font-bold uppercase tracking-widest text-sm italic">Genesis node activation pending. Welcome to the frontier.</p>
                           </div>
                        )}
@@ -329,7 +329,7 @@ const App = () => {
               exit={{ opacity: 0, x: -20 }}
               className="p-12 md:p-24 max-w-6xl"
             >
-              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-12 italic">Platform Vision.</h2>
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12 italic">Platform Vision.</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
                 <div className="bg-white/5 border border-white/10 p-10 rounded-[48px] backdrop-blur-xl">
