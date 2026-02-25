@@ -7,7 +7,9 @@ import {
   Wand2, UserCircle, Coins, TrendingUp, CpuIcon, ArrowRightLeft, 
   Check, Box, Maximize2, Share2, Users2, RefreshCw, Eye, Mic, 
   ChevronRight, Mail, Bell, DollarSign, ArrowUpRight, Sparkle, X, 
-  Loader2, Camera, AlertTriangle, Map, BarChart3, Rocket, Shield
+  Loader2, Camera, AlertTriangle, Map, BarChart3, Rocket, Shield,
+  Send, MessageCircle, Slack, Github, Calendar, Music, HardDrive, 
+  Circle, CheckCircle2, XCircle, Share
 } from 'lucide-react';
 
 // --- Gemini API Configuration ---
@@ -373,7 +375,82 @@ const App = () => {
             </motion.div>
           )}
 
-          {activeView !== 'home' && activeView !== 'platform-vision' && (
+          {activeView === 'integrations' && (
+            <motion.div
+              key="integrations"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="p-12 md:p-24 max-w-6xl"
+            >
+              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">Integrations.</h2>
+              <p className="text-slate-400 text-xl font-medium italic mb-16">Connect your digital ecosystem to the Possibility Engine.</p>
+
+              <div className="space-y-16">
+                {[
+                  {
+                    category: "Communication",
+                    items: [
+                      { name: "Telegram", icon: <Send size={24} />, status: "connected", color: "text-sky-400" },
+                      { name: "WhatsApp", icon: <MessageCircle size={24} />, status: "disconnected", color: "text-emerald-500" },
+                      { name: "Slack", icon: <Slack size={24} />, status: "connected", color: "text-purple-400" },
+                      { name: "Discord", icon: <MessageCircle size={24} />, status: "disconnected", color: "text-indigo-400" },
+                    ]
+                  },
+                  {
+                    category: "Productivity",
+                    items: [
+                      { name: "Google Drive", icon: <HardDrive size={24} />, status: "connected", color: "text-yellow-500" },
+                      { name: "Gmail", icon: <Mail size={24} />, status: "connected", color: "text-red-400" },
+                      { name: "GitHub", icon: <Github size={24} />, status: "disconnected", color: "text-slate-100" },
+                      { name: "Notion", icon: <Share size={24} />, status: "disconnected", color: "text-slate-100" },
+                    ]
+                  },
+                  {
+                    category: "Life & Performance",
+                    items: [
+                      { name: "Google Calendar", icon: <Calendar size={24} />, status: "connected", color: "text-blue-400" },
+                      { name: "Apple Health", icon: <Activity size={24} />, status: "disconnected", color: "text-pink-500" },
+                      { name: "Spotify", icon: <Music size={24} />, status: "disconnected", color: "text-emerald-400" },
+                    ]
+                  }
+                ].map((group) => (
+                  <div key={group.category} className="space-y-8">
+                    <h3 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 opacity-70 border-b border-white/5 pb-4">{group.category}</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {group.items.map((item) => (
+                        <div key={item.name} className="bg-white/5 border border-white/10 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
+                          <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform`}>
+                            {item.icon}
+                          </div>
+                          <h4 className="font-bold uppercase tracking-tight mb-6">{item.name}</h4>
+                          
+                          <div className="mt-auto w-full space-y-4">
+                            <div className="flex items-center justify-center gap-2">
+                              <div className={`w-2 h-2 rounded-full ${item.status === 'connected' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' : 'bg-red-500'}`} />
+                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                {item.status}
+                              </span>
+                            </div>
+                            
+                            <button className={`w-full py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all ${
+                              item.status === 'connected' 
+                                ? 'bg-white/5 text-slate-400 hover:bg-red-500/10 hover:text-red-400' 
+                                : 'bg-indigo-600 text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/20'
+                            }`}>
+                              {item.status === 'connected' ? 'Disconnect' : 'Connect'}
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'integrations' && (
             <motion.div
               key="placeholder"
               initial={{ opacity: 0 }}
