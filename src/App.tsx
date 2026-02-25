@@ -232,6 +232,7 @@ const App = () => {
               <div className="flex items-center gap-2"><span className="text-indigo-400 font-black text-[10px]">$PHD</span> <span className="text-[10px]">$4.12</span> <span className="text-emerald-400 text-[9px] font-bold">+2.4%</span></div>
               <div className="flex items-center gap-2"><span className="text-purple-400 font-black text-[10px]">$AST</span> <span className="text-[10px]">$1.05</span> <span className="text-emerald-400 text-[9px] font-bold">+0.8%</span></div>
               <div className="flex items-center gap-2"><span className="text-pink-400 font-black text-[10px]">$ASS</span> <span className="text-[10px]">$0.62</span> <span className="text-emerald-400 text-[9px] font-bold">+18.4%</span></div>
+              <div className="flex items-center gap-2"><span className="text-emerald-400 font-black text-[10px]">$USD+</span> <span className="text-[10px]">$1.00</span> <span className="text-slate-500 text-[9px] font-bold">0.0%</span></div>
            </div>
            <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 hidden sm:block">Status: Optimal</span>
         </div>
@@ -380,9 +381,9 @@ const App = () => {
                       <div className="bg-emerald-600/20 text-emerald-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
                         <Wallet size={24} />
                       </div>
-                      <h5 className="font-black uppercase text-xl italic mb-4">The Triple-Token Economy</h5>
+                      <h5 className="font-black uppercase text-xl italic mb-4">The Multi-Token Economy</h5>
                       <p className="text-slate-500 font-medium italic mb-6">
-                        Empower your agent to execute authorized commerce. Using $PHD, $AST, and $ASS tokens, Assistant, PhD can manage subscriptions, hire specialist agents, or even procure real-world services through our A2H (Agent-to-Human) marketplace.
+                        Empower your agent to execute authorized commerce. Using $PHD, $AST, $ASS and stable tokens, Assistant, PhD can manage subscriptions, hire specialist agents, or even procure real-world services through our A2H (Agent-to-Human) marketplace.
                       </p>
                       <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-emerald-400">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />

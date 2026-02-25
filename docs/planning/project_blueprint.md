@@ -8,10 +8,11 @@ An Autonomous Intelligence Ecosystem managed by AI, owned by the community. Assi
 *   **Aesthetics**: Flashy, high-contrast "Frontier" design with oversized typography, glassmorphism, and neon data accents.
 *   **Call to Action**: Low-friction "Genesis Waitlist" at the bottom of every page.
 
-## 🪙 Triple-Token Economy ($PHD, $AST, $ASS)
+## 🪙 Multi-Token Economy ($PHD, $AST, $ASS, $USD+)
 *   **$PHD (Professional)**: Institutional/Academic grade.
 *   **$AST (Assistant)**: Core utility and automation.
 *   **$ASS (Asset)**: Memetic/Creative velocity.
+*   **$USD+ (Stable)**: USD-pegged settlement layer.
 *   **Function**: Used for A2A (Agent-to-Agent) and A2H (Agent-to-Human) physical world hires.
 
 ## 🧩 The 26 Life Managers
