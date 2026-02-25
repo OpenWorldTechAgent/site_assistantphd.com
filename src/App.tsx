@@ -180,7 +180,7 @@ const App = () => {
               {[
                 { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
                 { id: 'status', label: 'Status & Health', icon: <Shield size={20} /> },
-                { id: 'integrations', label: 'Integrations', icon: <Zap size={20} /> },
+                { id: 'platform-integrations', label: 'System Integrations', icon: <Zap size={20} /> },
               ].map((item) => (
                 <button 
                   key={item.id} 
@@ -204,6 +204,7 @@ const App = () => {
                 { id: 'vision', label: 'Vision', icon: <Eye size={20} /> },
                 { id: 'economy', label: 'Economy', icon: <Coins size={20} /> },
                 { id: 'vault', label: 'Vault Data', icon: <Lock size={20} /> },
+                { id: 'user-integrations', label: 'Connections', icon: <PlugZap size={20} /> },
               ].map((item) => (
                 <button 
                   key={item.id} 
@@ -375,16 +376,16 @@ const App = () => {
             </motion.div>
           )}
 
-          {activeView === 'integrations' && (
+          {activeView === 'user-integrations' && (
             <motion.div
-              key="integrations"
+              key="user-integrations"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               className="p-12 md:p-24 max-w-6xl"
             >
-              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">Integrations.</h2>
-              <p className="text-slate-400 text-xl font-medium italic mb-16">Connect your digital ecosystem to the Possibility Engine.</p>
+              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">Connections.</h2>
+              <p className="text-slate-400 text-xl font-medium italic mb-16">Securely connect your personal data sources and communication channels.</p>
 
               <div className="space-y-16">
                 {[
@@ -451,7 +452,65 @@ const App = () => {
             </motion.div>
           )}
 
-          {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'integrations' && (
+          {activeView === 'platform-integrations' && (
+            <motion.div
+              key="platform-integrations"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="p-12 md:p-24 max-w-6xl"
+            >
+              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">System.</h2>
+              <p className="text-slate-400 text-xl font-medium italic mb-16">The core infrastructure and frontier models powering Assistant, PhD.</p>
+
+              <div className="space-y-16">
+                {[
+                  {
+                    category: "Intelligence Layers",
+                    items: [
+                      { name: "Google AI", icon: <Brain size={24} />, status: "operational", color: "text-blue-400" },
+                      { name: "Groq", icon: <Cpu size={24} />, status: "operational", color: "text-orange-400" },
+                      { name: "Hugging Face", icon: <Share size={24} />, status: "operational", color: "text-yellow-400" },
+                      { name: "X.AI", icon: <Zap size={24} />, status: "standby", color: "text-indigo-400" },
+                    ]
+                  },
+                  {
+                    category: "Processing & Storage",
+                    items: [
+                      { name: "Cloud Run", icon: <Server size={24} />, status: "operational", color: "text-blue-500" },
+                      { name: "Firestore", icon: <Database size={24} />, status: "operational", color: "text-orange-500" },
+                      { name: "Vector Vault", icon: <ShieldCheck size={24} />, status: "operational", color: "text-emerald-500" },
+                    ]
+                  }
+                ].map((group) => (
+                  <div key={group.category} className="space-y-8">
+                    <h3 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 opacity-70 border-b border-white/5 pb-4">{group.category}</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                      {group.items.map((item) => (
+                        <div key={item.name} className="bg-white/5 border border-white/10 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
+                          <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform`}>
+                            {item.icon}
+                          </div>
+                          <h4 className="font-bold uppercase tracking-tight mb-6">{item.name}</h4>
+                          
+                          <div className="mt-auto w-full space-y-4">
+                            <div className="flex items-center justify-center gap-2">
+                              <div className={`w-2 h-2 rounded-full ${item.status === 'operational' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' : 'bg-yellow-500'}`} />
+                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                {item.status}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && (
             <motion.div
               key="placeholder"
               initial={{ opacity: 0 }}
