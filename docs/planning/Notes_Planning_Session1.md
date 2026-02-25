@@ -124,8 +124,6 @@ The "PHD" Logo: I used a brain/academic icon with a heavy indigo underline to pl
 
 Actionable Language: Instead of "Ingestion Logs," I used "Daily Inlets" (like what you're putting into the system). Instead of "CPU Utilization," I used "Focus".
 
-Since you mentioned you use a small boat in Florida, think of this like a Garmin Chartplotter for your Life. You're just checking the "depth" and "conditions" of your day.
-
 What do you think of the "Personal Dynamics" or "PHD" naming? Does that feel more in line with a mass-market brand?
 
 You said
