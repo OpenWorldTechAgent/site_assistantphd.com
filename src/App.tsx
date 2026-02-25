@@ -204,7 +204,7 @@ const App = () => {
                 { id: 'insights', label: 'Insights', icon: <BarChart3 size={20} /> },
                 { id: 'vision', label: 'Vision', icon: <Eye size={20} /> },
                 { id: 'economy', label: 'Economy', icon: <Coins size={20} /> },
-                { id: 'activity', label: 'Activity & Fitness', icon: <Dumbbell size={20} /> },
+                { id: 'nutrition', label: 'Nutrition & Fitness', icon: <Dumbbell size={20} /> },
                 { id: 'vault', label: 'Vault Data', icon: <Lock size={20} /> },
                 { id: 'user-integrations', label: 'Connections', icon: <Zap size={20} /> },
               ].map((item) => (
