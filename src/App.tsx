@@ -9,7 +9,8 @@ import {
   ChevronRight, Mail, Bell, DollarSign, ArrowUpRight, Sparkle, X, 
   Loader2, Camera, AlertTriangle, Map, BarChart3, Rocket, Shield,
   Send, MessageCircle, Slack, Github, Calendar, Music, HardDrive, 
-  Circle, CheckCircle, XCircle, Share, Dumbbell, Youtube, Terminal, Zap
+  Circle, CheckCircle, XCircle, Share, Dumbbell, Youtube, Terminal, Zap,
+  Users, Wallet, Globe2, ShieldAlert
 } from 'lucide-react';
 
 // --- Gemini API Configuration ---
@@ -357,22 +358,68 @@ const App = () => {
                 </div>
               </div>
 
-              <div className="space-y-8">
-                <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8">The Three Tracks</h4>
-                {[
-                  { title: "Personal Homework Dashboard", target: "Students & Teens", desc: "A command center for academic excellence. Streamlined assignments, AI study partners, and career pathing." },
-                  { title: "Professional Help & Development", target: "Career Growth", desc: "The executive assistant for the modern professional. SRE-style observability for projects, networking, and skill acquisition." },
-                  { title: "Productivity, Habits, & Discipline", target: "The Optimization Track", desc: "Refining the human algorithm. Mastering the daily loops that lead to long-term wealth, health, and success." }
-                ].map((track, i) => (
-                  <div key={i} className="flex gap-8 p-8 border-b border-white/5 items-center group hover:bg-white/5 transition-all rounded-3xl">
-                    <span className="text-4xl font-black text-slate-800 transition-colors">0{i+1}</span>
-                    <div>
-                      <h5 className="font-black uppercase text-xl italic tracking-tight">{track.title}</h5>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-2 block">{track.target}</span>
-                      <p className="text-slate-500 font-medium italic">{track.desc}</p>
+              <div className="space-y-16">
+                <div>
+                  <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">Strategic Roadmap</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="bg-white/5 border border-white/10 p-8 rounded-[40px] hover:bg-white/10 transition-all">
+                      <div className="bg-indigo-600/20 text-indigo-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
+                        <Users size={24} />
+                      </div>
+                      <h5 className="font-black uppercase text-xl italic mb-4">Collaborative Intelligence</h5>
+                      <p className="text-slate-500 font-medium italic mb-6">
+                        Securely bridge your Assistant, PhD with your trusted circle. Whether it's family scheduling, team project management, or co-founder strategy, our Agent-to-Agent (A2A) protocol allows for seamless, private collaboration without compromising your individual sovereignty.
+                      </p>
+                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-indigo-400">
+                        <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                        In Development
+                      </div>
+                    </div>
+
+                    <div className="bg-white/5 border border-white/10 p-8 rounded-[40px] hover:bg-white/10 transition-all">
+                      <div className="bg-emerald-600/20 text-emerald-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
+                        <Wallet size={24} />
+                      </div>
+                      <h5 className="font-black uppercase text-xl italic mb-4">The Triple-Token Economy</h5>
+                      <p className="text-slate-500 font-medium italic mb-6">
+                        Empower your agent to execute authorized commerce. Using $PHD, $AST, and $ASS tokens, Assistant, PhD can manage subscriptions, hire specialist agents, or even procure real-world services through our A2H (Agent-to-Human) marketplace.
+                      </p>
+                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Beta Phase
+                      </div>
                     </div>
                   </div>
-                ))}
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">The Three Tracks</h4>
+                  {[
+                    { title: "Personal Homework Dashboard", target: "Students & Teens", desc: "A command center for academic excellence. Streamlined assignments, AI study partners, and career pathing." },
+                    { title: "Professional Help & Development", target: "Career Growth", desc: "The executive assistant for the modern professional. High-performance observability for projects, networking, and skill acquisition." },
+                    { title: "Productivity, Habits, & Discipline", target: "The Optimization Track", desc: "Refining the human algorithm. Mastering the daily loops that lead to long-term wealth, health, and success." }
+                  ].map((track, i) => (
+                    <div key={i} className="flex gap-8 p-8 border-b border-white/5 items-center group hover:bg-white/5 transition-all rounded-3xl">
+                      <span className="text-4xl font-black text-slate-800 transition-colors">0{i+1}</span>
+                      <div>
+                        <h5 className="font-black uppercase text-xl italic tracking-tight">{track.title}</h5>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-2 block">{track.target}</span>
+                        <p className="text-slate-500 font-medium italic">{track.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">Master Domains Preview</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {["Home Ops", "Wealth", "Vitality", "Growth", "Expedition", "Culture"].map((domain) => (
+                      <div key={domain} className="bg-white/5 border border-white/10 p-6 rounded-3xl text-center group hover:border-indigo-500/50 transition-all">
+                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-white transition-colors">{domain}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
