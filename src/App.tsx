@@ -182,13 +182,15 @@ const App = () => {
       `}</style>
 
       {/* Atmospheric Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-20">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute inset-0 bg-[#020617] opacity-90" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/20 rounded-full blur-[120px] mix-blend-screen animate-pulse duration-[8000ms]" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-600/20 rounded-full blur-[120px] mix-blend-screen animate-pulse duration-[10000ms]" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-[40%] left-[60%] w-[30%] h-[30%] bg-cyan-600/10 rounded-full blur-[100px] mix-blend-screen animate-pulse duration-[12000ms]" style={{ animationDelay: '2s' }} />
       </div>
 
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-20 md:w-64 bg-slate-950/80 border-r border-white/5 backdrop-blur-xl z-50 shadow-2xl overflow-y-auto custom-scrollbar">
+      <aside className="fixed left-0 top-0 h-full w-20 md:w-64 glass-panel-heavy border-r border-white/5 z-50 shadow-2xl overflow-y-auto custom-scrollbar">
         <div 
           onClick={() => setActiveView('home')}
           className="p-8 flex items-center gap-3 border-b border-white/5 cursor-pointer hover:bg-white/5 transition-colors group"
@@ -281,17 +283,17 @@ const App = () => {
                     <p className="font-black text-[10px] uppercase tracking-[0.4em]">One Platform. Infinite Possibilities.</p>
                   </div>
 
-                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1] uppercase mb-8 relative z-10 select-none">
+                  <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[1] uppercase mb-8 relative z-10 select-none text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-300 drop-shadow-sm">
                     What will you <br />
                     {/* Top Carousel (Slow) */}
-                    <RollingSlot items={SET_A} currentIndex={indexA} activeColor="text-indigo-500" />
+                    <RollingSlot items={SET_A} currentIndex={indexA} activeColor="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400" />
                     <br />
                     {/* Brighter Connecting Text */}
                     <span className="text-slate-100 text-xl md:text-3xl lg:text-4xl block my-6 font-mono italic normal-case tracking-tight opacity-100">
                       with your personal Assistant, PhD?
                     </span>
                     {/* Bottom Carousel (Fast) */}
-                    <RollingSlot items={SET_B} currentIndex={indexB} activeColor="text-purple-400" />
+                    <RollingSlot items={SET_B} currentIndex={indexB} activeColor="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400" />
                   </h1>
 
                   <p className="text-base md:text-xl text-slate-400 max-w-5xl leading-relaxed mb-10 relative z-10 font-medium italic">
@@ -300,18 +302,19 @@ const App = () => {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto relative z-10">
-                     <a href="#waitlist" className="bg-indigo-600 hover:bg-indigo-500 text-white px-12 py-6 rounded-[32px] font-black text-xs uppercase tracking-[0.4em] shadow-2xl transition-all hover:scale-105 text-center">
-                        Join Genesis Waitlist
+                     <a href="#waitlist" className="relative group overflow-hidden bg-indigo-600 text-white px-12 py-6 rounded-[32px] font-black text-xs uppercase tracking-[0.4em] shadow-[0_0_40px_rgba(79,70,229,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(79,70,229,0.6)] text-center flex items-center justify-center">
+                        <span className="relative z-10">Join Genesis Waitlist</span>
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                    </a>
-                   <button onClick={() => setIsChatOpen(true)} className="bg-white/5 hover:bg-white/10 text-white px-12 py-6 rounded-[32px] font-black text-xs uppercase tracking-[0.4em] backdrop-blur-md border border-white/10 flex items-center justify-center gap-3">
-                      Talk to Operator <Mic size={16} />
+                   <button onClick={() => setIsChatOpen(true)} className="glass-panel group hover:bg-white/10 text-white px-12 py-6 rounded-[32px] font-black text-xs uppercase tracking-[0.4em] transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(79,70,229,0.2)] flex items-center justify-center gap-3">
+                      <span className="relative z-10 flex items-center gap-3">Talk to Operator <Mic size={16} className="text-indigo-400 group-hover:animate-pulse" /></span>
                    </button>
                 </div>
               </section>
 
               {/* Waitlist Section */}
               <section id="waitlist" className="px-6 md:px-12 py-32 mb-20">
-                 <div className="bg-indigo-600 rounded-[80px] p-12 md:p-32 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
+                 <div className="bg-gradient-to-br from-indigo-700 to-indigo-900 rounded-[80px] border border-indigo-500/20 p-12 md:p-32 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-60" />
                     <div className="relative z-10 max-w-4xl mx-auto">
                                         <h2 className="text-4xl md:text-7xl font-black text-white mb-10 uppercase tracking-tighter leading-[0.8] italic">Own Your <br /> Future.</h2>
@@ -369,7 +372,7 @@ const App = () => {
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12 italic">Platform Vision.</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
-                <div className="bg-white/5 border border-white/10 p-10 rounded-[48px] backdrop-blur-xl">
+                <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-10 rounded-[48px] backdrop-blur-xl">
                   <div className="bg-indigo-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
                     <Activity size={24} />
                   </div>
@@ -379,7 +382,7 @@ const App = () => {
                   </p>
                 </div>
 
-                <div className="bg-white/5 border border-white/10 p-10 rounded-[48px] backdrop-blur-xl">
+                <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-10 rounded-[48px] backdrop-blur-xl">
                   <div className="bg-purple-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
                     <ShieldCheck size={24} />
                   </div>
@@ -394,7 +397,7 @@ const App = () => {
                 <div>
                   <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">Strategic Roadmap</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="bg-white/5 border border-white/10 p-8 rounded-[40px] hover:bg-white/10 transition-all">
+                    <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[40px] hover:bg-white/10 transition-all">
                       <div className="bg-indigo-600/20 text-indigo-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
                         <Users size={24} />
                       </div>
@@ -408,7 +411,7 @@ const App = () => {
                       </div>
                     </div>
 
-                    <div className="bg-white/5 border border-white/10 p-8 rounded-[40px] hover:bg-white/10 transition-all">
+                    <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[40px] hover:bg-white/10 transition-all">
                       <div className="bg-emerald-600/20 text-emerald-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
                         <Wallet size={24} />
                       </div>
@@ -446,7 +449,7 @@ const App = () => {
                   <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">Master Domains Preview</h4>
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     {["Home Ops", "Wealth", "Vitality", "Growth", "Expedition", "Culture"].map((domain) => (
-                      <div key={domain} className="bg-white/5 border border-white/10 p-6 rounded-3xl text-center group hover:border-indigo-500/50 transition-all">
+                      <div key={domain} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-6 rounded-3xl text-center group hover:border-indigo-500/50 transition-all">
                         <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-white transition-colors">{domain}</span>
                       </div>
                     ))}
@@ -503,7 +506,7 @@ const App = () => {
                     <h3 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 opacity-70 border-b border-white/5 pb-4">{group.category}</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                       {group.items.map((item) => (
-                        <div key={item.name} className="bg-white/5 border border-white/10 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
+                        <div key={item.name} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
                           <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform`}>
                             {item.icon}
                           </div>
@@ -576,7 +579,7 @@ const App = () => {
                     <h3 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 opacity-70 border-b border-white/5 pb-4">{group.category}</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                       {group.items.map((item) => (
-                        <div key={item.name} className="bg-white/5 border border-white/10 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
+                        <div key={item.name} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
                           <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform`}>
                             {item.icon}
                           </div>
@@ -630,7 +633,7 @@ const App = () => {
       {/* --- Floating Operator Assistant --- */}
       <div className={`fixed bottom-10 right-10 z-[100] transition-all duration-700 ease-[cubic-bezier(0.2,1,0.2,1)] ${isChatOpen ? 'w-[380px] md:w-[500px]' : 'w-20'}`}>
         {isChatOpen ? (
-          <div className="bg-slate-950 border border-white/10 rounded-[56px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden h-[700px] backdrop-blur-3xl">
+          <div className="glass-panel-heavy rounded-[56px] flex flex-col overflow-hidden h-[700px]">
             <div className="bg-indigo-600 p-10 flex justify-between items-center text-white">
               <div className="flex items-center gap-4">
                 <div className="bg-white/10 p-3 rounded-2xl"><CpuIcon size={24} /></div>
@@ -656,7 +659,7 @@ const App = () => {
             </div>
             <form onSubmit={handleSendMessage} className="p-10 bg-slate-950 border-t border-white/5">
               <div className="relative group flex gap-3">
-                <input type="text" value={chatInput} onChange={(e) => setChatInput(e.target.value)} disabled={isTyping} placeholder="Speak with the operator..." className="flex-1 bg-white/5 border border-white/10 rounded-[32px] py-5 px-8 text-white outline-none font-mono focus:border-indigo-500/50" />
+                <input type="text" value={chatInput} onChange={(e) => setChatInput(e.target.value)} disabled={isTyping} placeholder="Speak with the operator..." className="flex-1 glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 rounded-[32px] py-5 px-8 text-white outline-none font-mono focus:border-indigo-500/50" />
                 <button type="submit" disabled={isTyping || !chatInput.trim()} className="bg-indigo-600 text-white p-5 rounded-[24px] shadow-2xl transition-transform"><Zap size={24} /></button>
               </div>
             </form>
