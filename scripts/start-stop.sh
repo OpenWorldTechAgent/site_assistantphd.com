@@ -22,6 +22,11 @@ show_help() {
     echo "  logs      Tail Vite logs"
     echo "  api-logs  Tail API logs"
     echo "  --help    Show this help message"
+    echo ""
+    echo "Options:"
+    echo "  -p, --port <port>       Set the Vite server port (default: 3001, auto-shifts API port)"
+    echo "  -a, --api-port <port>   Set the API server port (default: 3000)"
+    echo "  -f, --force             Force kill existing processes on the required ports"
 }
 
 start_server() {
@@ -47,7 +52,7 @@ start_server() {
 
     # Start Vite Server
     echo "Starting Vite server on port $PORT..."
-    npx vite --port $PORT --host localhost --strictPort > "$LOG_FILE" 2>&1 &
+    API_PORT=$API_PORT npx vite --port $PORT --host localhost --strictPort > "$LOG_FILE" 2>&1 &
     echo $! > "$PID_FILE"
     
     echo "Servers started successfully."
@@ -89,7 +94,8 @@ shift
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        -p|--port) PORT="$2"; shift ;;
+        -p|--port) PORT="$2"; API_PORT=$(($2 + 1)); shift ;;
+        -a|--api-port) API_PORT="$2"; shift ;;
         -f|--force) FORCE=true ;;
         *) echo "Unknown option: $1"; show_help; exit 1 ;;
     esac
