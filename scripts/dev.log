@@ -646,3 +646,4 @@
       at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
       at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
 9:33:14 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+
