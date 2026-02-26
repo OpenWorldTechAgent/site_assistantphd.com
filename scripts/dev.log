@@ -1,6 +1,649 @@
 
-  VITE v6.4.1  ready in 1130 ms
+  VITE v6.4.1  ready in 225 ms
 
-  ➜  Local:   http://localhost:3001/
-6:44:34 PM [vite] (client) hmr update /src/App.tsx, /src/index.css
-7:44:10 PM [vite] (client) page reload scripts/update_visuals.py
+  ➜  Local:   http://localhost:4001/
+8:32:35 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+8:45:31 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+9:15:23 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+9:25:53 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+9:30:08 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+9:30:08 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (846:14)
+
+  844 |                   ))}
+  845 |                     </div>
+> 846 |               </motion.div>
+      |               ^
+  847 |             )}
+  848 |
+  849 |             {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:846:14
+  844|                    ))}
+  845|                      </div>
+  846|                </motion.div>
+     |                ^
+  847|              )}
+  848|  
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4742:18)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+9:30:08 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (846:14)
+
+  844 |                   ))}
+  845 |                     </div>
+> 846 |               </motion.div>
+      |               ^
+  847 |             )}
+  848 |
+  849 |             {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:846:14
+  844|                    ))}
+  845|                      </div>
+  846|                </motion.div>
+     |                ^
+  847|              )}
+  848|  
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4742:18)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+9:30:08 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (846:14)
+
+  844 |                   ))}
+  845 |                     </div>
+> 846 |               </motion.div>
+      |               ^
+  847 |             )}
+  848 |
+  849 |             {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:846:14
+  844|                    ))}
+  845|                      </div>
+  846|                </motion.div>
+     |                ^
+  847|              )}
+  848|  
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4742:18)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+9:30:09 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (846:14)
+
+  844 |                   ))}
+  845 |                     </div>
+> 846 |               </motion.div>
+      |               ^
+  847 |             )}
+  848 |
+  849 |             {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:846:14
+  844|                    ))}
+  845|                      </div>
+  846|                </motion.div>
+     |                ^
+  847|              )}
+  848|  
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4742:18)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+9:30:09 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (846:14)
+
+  844 |                   ))}
+  845 |                     </div>
+> 846 |               </motion.div>
+      |               ^
+  847 |             )}
+  848 |
+  849 |             {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:846:14
+  844|                    ))}
+  845|                      </div>
+  846|                </motion.div>
+     |                ^
+  847|              )}
+  848|  
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4742:18)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+9:31:14 AM [vite] (client) Pre-transform error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (846:14)
+
+  844 |                   ))}
+  845 |                     </div>
+> 846 |               </motion.div>
+      |               ^
+  847 |             )}
+  848 |
+  849 |             {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:846:14
+  844|                    ))}
+  845|                      </div>
+  846|                </motion.div>
+     |                ^
+  847|              )}
+  848|  
+9:31:14 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (846:14)
+
+  844 |                   ))}
+  845 |                     </div>
+> 846 |               </motion.div>
+      |               ^
+  847 |             )}
+  848 |
+  849 |             {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:846:14
+  844|                    ))}
+  845|                      </div>
+  846|                </motion.div>
+     |                ^
+  847|              )}
+  848|  
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4742:18)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+9:31:22 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (846:14)
+
+  844 |                   ))}
+  845 |                     </div>
+> 846 |               </motion.div>
+      |               ^
+  847 |             )}
+  848 |
+  849 |             {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:846:14
+  844|                    ))}
+  845|                      </div>
+  846|                </motion.div>
+     |                ^
+  847|              )}
+  848|  
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4742:18)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+9:32:12 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+9:32:12 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Expected corresponding JSX closing tag for <div>. (853:22)
+
+  851 |                           )}
+  852 |                         </AnimatePresence>
+> 853 |                       </AnimatePresence>
+      |                       ^
+  854 |                     </div>
+  855 |                     </div>
+  856 |                   ))}
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:853:22
+  851|                            )}
+  852|                          </AnimatePresence>
+  853|                        </AnimatePresence>
+     |                        ^
+  854|                      </div>
+  855|                      </div>
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4727:16)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4698:32)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+9:32:12 AM [vite] (client) Pre-transform error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Expected corresponding JSX closing tag for <div>. (853:22)
+
+  851 |                           )}
+  852 |                         </AnimatePresence>
+> 853 |                       </AnimatePresence>
+      |                       ^
+  854 |                     </div>
+  855 |                     </div>
+  856 |                   ))}
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:853:22
+  851|                            )}
+  852|                          </AnimatePresence>
+  853|                        </AnimatePresence>
+     |                        ^
+  854|                      </div>
+  855|                      </div>
+9:32:12 AM [vite] Internal server error: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx: Expected corresponding JSX closing tag for <div>. (853:22)
+
+  851 |                           )}
+  852 |                         </AnimatePresence>
+> 853 |                       </AnimatePresence>
+      |                       ^
+  854 |                     </div>
+  855 |                     </div>
+  856 |                   ))}
+  Plugin: vite:react-babel
+  File: /Users/mpursley/dev/site_assistantphd.com/src/App.tsx:853:22
+  851|                            )}
+  852|                          </AnimatePresence>
+  853|                        </AnimatePresence>
+     |                        ^
+  854|                      </div>
+  855|                      </div>
+      at constructor (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:365:19)
+      at TypeScriptParserMixin.raise (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6599:19)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4727:16)
+      at TypeScriptParserMixin.jsxParseElementAt (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4698:32)
+      at TypeScriptParserMixin.jsxParseElement (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4749:17)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4759:19)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:39
+      at TypeScriptParserMixin.tryParse (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:6907:20)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9775:18)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12493:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11675:28)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at TypeScriptParserMixin.parseFunctionBody (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12093:24)
+      at TypeScriptParserMixin.parseArrowExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12075:10)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11687:12)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11331:23)
+      at TypeScriptParserMixin.parseExprAtom (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:4764:20)
+      at TypeScriptParserMixin.parseExprSubscripts (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11081:23)
+      at TypeScriptParserMixin.parseUpdate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11066:21)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:11046:23)
+      at TypeScriptParserMixin.parseMaybeUnary (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9837:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10899:61)
+      at TypeScriptParserMixin.parseExprOps (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10904:23)
+      at TypeScriptParserMixin.parseMaybeConditional (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10881:23)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10831:21)
+      at TypeScriptParserMixin.parseMaybeAssign (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:9786:20)
+      at /Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:39
+      at TypeScriptParserMixin.allowInAnd (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:12426:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/mpursley/dev/site_assistantphd.com/node_modules/@babel/parser/lib/index.js:10800:17)
+9:33:14 AM [vite] (client) hmr update /src/App.tsx, /src/index.css
+

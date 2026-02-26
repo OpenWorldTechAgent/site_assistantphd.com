@@ -1,25 +1,25 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import {
   Activity, Moon, User, Upload, MessageSquare, ShieldCheck, Lock,
   Clock, Heart, Brain, Sparkles, Server, Cpu, Globe, Database, Layers,
-  Wand2, UserCircle, Coins, TrendingUp, CpuIcon, ArrowRightLeft, 
-  Check, Box, Maximize2, Share2, Users2, RefreshCw, Eye, Mic, 
-  ChevronRight, Mail, Bell, DollarSign, ArrowUpRight, Sparkle, X, 
+  Wand2, UserCircle, Coins, TrendingUp, CpuIcon, ArrowRightLeft,
+  Check, Box, Maximize2, Share2, Users2, RefreshCw, Eye, Mic,
+  ChevronRight, Mail, Bell, DollarSign, ArrowUpRight, Sparkle, X,
   Loader2, Camera, AlertTriangle, Map, BarChart3, Rocket, Shield,
-  Send, MessageCircle, Slack, Github, Calendar, Music, HardDrive, 
+  Send, MessageCircle, Slack, Github, Calendar, Music, HardDrive,
   Circle, CheckCircle, XCircle, Share, Dumbbell, Youtube, Terminal, Zap,
-  Users, Wallet, Globe2, ShieldAlert
+  Users, Wallet, Globe2, ShieldAlert, FolderKey, Plus, ArrowDownUp
 } from 'lucide-react';
 
 // --- Gemini API Configuration ---
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; 
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
 const GEMINI_MODEL = "gemini-2.5-flash";
 
 const SET_A = ["Design", "Master", "Build", "Earn", "Navigate", "Architect", "Optimize", "Secure", "Scale"];
 const SET_B = [
-  "Art", "Music", "Stories", "Education", "Technology", "Skills", 
+  "Art", "Music", "Stories", "Education", "Technology", "Skills",
   "Tools", "Apps", "Systems", "Wealth", "Equity", "Rewards",
   "Expeditions", "Cultures", "Cities", "Presence", "Identity", "Fame",
   "Vitality", "Focus", "Energy", "Freedom", "Privacy", "Sovereignty",
@@ -66,8 +66,64 @@ const RollingSlot = ({ items, currentIndex, activeColor }) => {
   );
 };
 
+const INITIAL_PROJECTS = [
+  {
+    id: 1, name: "Get in better shape", meta: "2 Active Tasks",
+    tags: ["Health", "Fitness"],
+    tasks: [
+      { id: 101, title: "Configure Apple Health Sync", tag: "Integration", priority: 95 },
+      { id: 102, title: "Configure Samsung Health Sync", tag: "Integration", priority: 90 }
+    ]
+  },
+  {
+    id: 2, name: "Deploy New Website", meta: "5 Active Tasks",
+    tags: ["Frontend", "Launch"],
+    tasks: [
+      { id: 201, title: "Bootstrap UI Elements", tag: "Frontend", priority: 80 },
+      { id: 202, title: "Initialize Database Schema", tag: "Backend", priority: 85 },
+      { id: 203, title: "Review Architect Plan", tag: "Review", priority: 40 },
+      { id: 204, title: "Deploy to Vercel/CloudRun", tag: "Deploy", priority: 65 },
+      { id: 205, title: "Monitor Core Web Vitals", tag: "Monitoring", priority: 30 }
+    ]
+  },
+  {
+    id: 3, name: "Get More Customers", meta: "35 Active Tasks",
+    tags: ["Growth", "Marketing"],
+    tasks: Array.from({ length: 35 }).map((_, i) => ({
+      id: 300 + i,
+      title: `Marketing Outreach Experiment #${i + 1}`,
+      tag: "Marketing",
+      priority: Math.floor(Math.random() * 40) + 60
+    })).concat([{ id: 399, title: "Draft GTM Strategy", tag: "Marketing", priority: 99 }])
+  },
+  {
+    id: 4, name: "Finish New Fitness Module", meta: "2 Active Tasks",
+    tags: ["Feature", "Health"],
+    tasks: [
+      { id: 401, title: "Build Apple Health API connector", tag: "Backend", priority: 85 },
+      { id: 402, title: "Build Samsung Health API connector", tag: "Backend", priority: 85 }
+    ]
+  },
+  {
+    id: 5, name: "Add Integrations", meta: "5 Active Tasks",
+    tags: ["Backend", "Connections"],
+    tasks: [
+      { id: 501, title: "Integrate Slack", tag: "Comms", priority: 80 },
+      { id: 502, title: "Integrate Discord", tag: "Comms", priority: 70 },
+      { id: 503, title: "Integrate Github (Read Only)", tag: "Source", priority: 90 },
+      { id: 504, title: "Integrate Hugging Face Models", tag: "AI", priority: 95 },
+      { id: 505, title: "Integrate Notion Docs", tag: "Knowledge", priority: 75 }
+    ]
+  }
+];
+
 const App = () => {
   const [activeView, setActiveView] = useState('home');
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [projects, setProjects] = useState(INITIAL_PROJECTS);
+  const [changedTaskIds, setChangedTaskIds] = useState<number[]>([]);
+  const [projectSortSelect, setProjectSortSelect] = useState<'priority' | 'name' | 'tag' | 'custom'>('priority');
+  const [taskSortSelect, setTaskSortSelect] = useState<'priority' | 'name' | 'tag' | 'custom'>('priority');
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -81,19 +137,19 @@ const App = () => {
       if (element) element.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   };
-  
+
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage('');
-    
+
     try {
       const response = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: waitlistEmail })
       });
-      
+
       if (response.ok) {
         setIsSubmitted(true);
       } else {
@@ -114,12 +170,53 @@ const App = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setGlobalIndex((prev) => {
-        console.log("Updating globalIndex to:", prev + 1);
-        return prev + 1;
-      });
+      setGlobalIndex((prev) => prev + 1);
     }, 1500);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const prioTimer = setInterval(() => {
+      setProjects((prevProjects) => {
+        const newProjects = [...prevProjects];
+        const updatedTaskIds: number[] = [];
+
+        // Randomly pick 1-3 tasks across all projects to bump priority up or down by a little bit
+        const numToChange = Math.floor(Math.random() * 3) + 1;
+
+        for (let i = 0; i < numToChange; i++) {
+          const pIdx = Math.floor(Math.random() * newProjects.length);
+          const p = { ...newProjects[pIdx] }; // clone project
+          if (p.tasks.length === 0) continue;
+
+          const pTasks = [...p.tasks]; // clone tasks
+          const tIdx = Math.floor(Math.random() * pTasks.length);
+          const t = pTasks[tIdx];
+
+          // Random change between -5 and +5
+          const change = Math.floor(Math.random() * 11) - 5;
+          if (change === 0) continue;
+
+          const newPriority = Math.max(1, Math.min(99, t.priority + change));
+          if (newPriority !== t.priority) {
+            pTasks[tIdx] = { ...t, priority: newPriority };
+            updatedTaskIds.push(t.id);
+            p.tasks = pTasks;
+            newProjects[pIdx] = p;
+          }
+        }
+
+        if (updatedTaskIds.length > 0) {
+          setChangedTaskIds((prev) => [...prev, ...updatedTaskIds]);
+          setTimeout(() => {
+            setChangedTaskIds((prev) => prev.filter(id => !updatedTaskIds.includes(id)));
+          }, 5000);
+        }
+
+        return newProjects;
+      });
+    }, 10000);
+    return () => clearInterval(prioTimer);
   }, []);
 
   const [messages, setMessages] = useState([{ role: 'assistant', content: 'Operator online. The Possibility Engine is synced. How shall we architect your life today?' }]);
@@ -162,7 +259,7 @@ const App = () => {
         const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "System sync error: No content received.";
         setMessages(prev => [...prev, { role: 'assistant', content: text }]);
       }
-    } catch (e) { 
+    } catch (e) {
       console.error("Fetch Error:", e);
       setMessages(prev => [...prev, { role: 'assistant', content: `Network error: ${e.message}` }]);
     }
@@ -191,7 +288,7 @@ const App = () => {
 
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 h-full w-20 md:w-64 glass-panel-heavy border-r border-white/5 z-50 shadow-2xl overflow-y-auto custom-scrollbar">
-        <div 
+        <div
           onClick={() => setActiveView('home')}
           className="p-8 flex items-center gap-3 border-b border-white/5 cursor-pointer hover:bg-white/5 transition-colors group"
         >
@@ -203,22 +300,25 @@ const App = () => {
             <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mt-1 block">Autonomous Agent</span>
           </div>
         </div>
-        
+
         <nav className="p-6 space-y-10">
           <div>
-            <span className="px-3 text-[14px] font-black text-slate-500 uppercase tracking-[0.3em] mb-6 block border-l-2 border-indigo-500/30">Platform</span>
+            <span className="px-3 text-[14px] font-black text-slate-500 uppercase tracking-[0.3em] mb-6 block border-l-2 border-indigo-500/30">Your</span>
             <div className="space-y-2">
               {[
-                { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
-                { id: 'status', label: 'Status & Health', icon: <Shield size={20} /> },
-                { id: 'platform-integrations', label: 'System Integrations', icon: <Activity size={20} /> },
+                { id: 'projects', label: 'Projects', icon: <FolderKey size={20} /> },
+                { id: 'insights', label: 'Insights', icon: <BarChart3 size={20} /> },
+                { id: 'vision', label: 'Vision', icon: <Eye size={20} /> },
+                { id: 'economy', label: 'Economy', icon: <Coins size={20} /> },
+                { id: 'nutrition', label: 'Nutrition & Fitness', icon: <Dumbbell size={20} /> },
+                { id: 'vault', label: 'Vault Data', icon: <Lock size={20} /> },
+                { id: 'user-integrations', label: 'Connections', icon: <Zap size={20} /> },
               ].map((item) => (
-                <button 
-                  key={item.id} 
-                  onClick={() => setActiveView(item.id)}
-                  className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold ${
-                    activeView === item.id ? 'text-white bg-white/5 shadow-inner' : 'text-slate-500 hover:text-white hover:bg-white/5'
-                  }`}
+                <button
+                  key={item.id}
+                  onClick={() => { setActiveView(item.id); setSelectedProject(null); }}
+                  className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold ${activeView === item.id ? 'text-white bg-white/5 shadow-inner' : 'text-slate-500 hover:text-white hover:bg-white/5'
+                    }`}
                 >
                   {item.icon}
                   <span className="hidden md:block text-[11px] uppercase tracking-[0.2em]">{item.label}</span>
@@ -228,22 +328,18 @@ const App = () => {
           </div>
 
           <div>
-            <span className="px-3 text-[14px] font-black text-slate-500 uppercase tracking-[0.3em] mb-6 block border-l-2 border-indigo-500/30">Your</span>
+            <span className="px-3 text-[14px] font-black text-slate-500 uppercase tracking-[0.3em] mb-6 block mt-10 border-l-2 border-indigo-500/30">Platform</span>
             <div className="space-y-2">
               {[
-                { id: 'insights', label: 'Insights', icon: <BarChart3 size={20} /> },
-                { id: 'vision', label: 'Vision', icon: <Eye size={20} /> },
-                { id: 'economy', label: 'Economy', icon: <Coins size={20} /> },
-                { id: 'nutrition', label: 'Nutrition & Fitness', icon: <Dumbbell size={20} /> },
-                { id: 'vault', label: 'Vault Data', icon: <Lock size={20} /> },
-                { id: 'user-integrations', label: 'Connections', icon: <Zap size={20} /> },
+                { id: 'platform-vision', label: 'Vision & Plans', icon: <Rocket size={20} /> },
+                { id: 'status', label: 'Status & Health', icon: <Shield size={20} /> },
+                { id: 'platform-integrations', label: 'System Integrations', icon: <Activity size={20} /> },
               ].map((item) => (
-                <button 
-                  key={item.id} 
-                  onClick={() => setActiveView(item.id)}
-                  className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold ${
-                    activeView === item.id ? 'text-white bg-white/5 shadow-inner' : 'text-slate-500 hover:text-white hover:bg-white/5'
-                  }`}
+                <button
+                  key={item.id}
+                  onClick={() => { setActiveView(item.id); setSelectedProject(null); }}
+                  className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left font-bold ${activeView === item.id ? 'text-white bg-white/5 shadow-inner' : 'text-slate-500 hover:text-white hover:bg-white/5'
+                    }`}
                 >
                   {item.icon}
                   <span className="hidden md:block text-[11px] uppercase tracking-[0.2em]">{item.label}</span>
@@ -258,28 +354,28 @@ const App = () => {
       <main className="ml-20 md:ml-64 relative">
         {/* Market Ticker */}
         <div className="sticky top-0 z-40 bg-slate-950/50 backdrop-blur-md border-b border-white/5 px-8 py-4 flex items-center justify-between font-mono">
-           <div className="flex gap-10">
-              <div className="flex items-center gap-2"><span className="text-indigo-400 font-black text-[10px]">$PHD</span> <span className="text-[10px]">$4.12</span> <span className="text-emerald-400 text-[9px] font-bold">+2.4%</span></div>
-              <div className="flex items-center gap-2"><span className="text-purple-400 font-black text-[10px]">$AST</span> <span className="text-[10px]">$1.05</span> <span className="text-emerald-400 text-[9px] font-bold">+0.8%</span></div>
-              <div className="flex items-center gap-2"><span className="text-pink-400 font-black text-[10px]">$ASS</span> <span className="text-[10px]">$0.62</span> <span className="text-emerald-400 text-[9px] font-bold">+18.4%</span></div>
-              <div className="flex items-center gap-2"><span className="text-emerald-400 font-black text-[10px]">$USD+</span> <span className="text-[10px]">$1.00</span> <span className="text-slate-500 text-[9px] font-bold">0.0%</span></div>
-           </div>
-           <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 hidden sm:block">Status: Optimal</span>
+          <div className="flex gap-10">
+            <div className="flex items-center gap-2"><span className="text-indigo-400 font-black text-[10px]">$PHD</span> <span className="text-[10px]">$4.12</span> <span className="text-emerald-400 text-[9px] font-bold">+2.4%</span></div>
+            <div className="flex items-center gap-2"><span className="text-purple-400 font-black text-[10px]">$AST</span> <span className="text-[10px]">$1.05</span> <span className="text-emerald-400 text-[9px] font-bold">+0.8%</span></div>
+            <div className="flex items-center gap-2"><span className="text-pink-400 font-black text-[10px]">$ASS</span> <span className="text-[10px]">$0.62</span> <span className="text-emerald-400 text-[9px] font-bold">+18.4%</span></div>
+            <div className="flex items-center gap-2"><span className="text-emerald-400 font-black text-[10px]">$USD+</span> <span className="text-[10px]">$1.00</span> <span className="text-slate-500 text-[9px] font-bold">0.0%</span></div>
+          </div>
+          <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 hidden sm:block">Status: Optimal</span>
         </div>
 
         <div className="relative min-h-screen">
           <AnimatePresence mode="wait">
             {activeView === 'home' && (
-                          <motion.div
-                            key="home"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.4 }}
-                          >
-                            {/* Hero Section: The Possibility Engine */}
-                            <section className="px-6 md:px-12 py-8 md:py-20 flex flex-col items-center md:items-start text-center md:text-left relative min-h-[60vh] justify-center">
-                              <div className="flex items-center gap-2 mb-6 bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-xl w-fit relative z-10">                    <Sparkles size={16} className="text-indigo-400" />
+              <motion.div
+                key="home"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+              >
+                {/* Hero Section: The Possibility Engine */}
+                <section className="px-6 md:px-12 py-8 md:py-20 flex flex-col items-center md:items-start text-center md:text-left relative min-h-[60vh] justify-center">
+                  <div className="flex items-center gap-2 mb-6 bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-xl w-fit relative z-10">                    <Sparkles size={16} className="text-indigo-400" />
                     <p className="font-black text-[10px] uppercase tracking-[0.4em]">One Platform. Infinite Possibilities.</p>
                   </div>
 
@@ -302,330 +398,489 @@ const App = () => {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto relative z-10">
-                     <a href="#waitlist" className="relative group overflow-hidden bg-indigo-600 text-white px-12 py-6 rounded-[32px] font-black text-xs uppercase tracking-[0.4em] shadow-[0_0_40px_rgba(79,70,229,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(79,70,229,0.6)] text-center flex items-center justify-center">
-                        <span className="relative z-10">Join Genesis Waitlist</span>
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                   </a>
-                   <button onClick={() => setIsChatOpen(true)} className="glass-panel group hover:bg-white/10 text-white px-12 py-6 rounded-[32px] font-black text-xs uppercase tracking-[0.4em] transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(79,70,229,0.2)] flex items-center justify-center gap-3">
+                    <a href="#waitlist" className="relative group overflow-hidden bg-indigo-600 text-white px-12 py-6 rounded-[32px] font-black text-xs uppercase tracking-[0.4em] shadow-[0_0_40px_rgba(79,70,229,0.4)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(79,70,229,0.6)] text-center flex items-center justify-center">
+                      <span className="relative z-10">Join Genesis Waitlist</span>
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </a>
+                    <button onClick={() => setIsChatOpen(true)} className="glass-panel group hover:bg-white/10 text-white px-12 py-6 rounded-[32px] font-black text-xs uppercase tracking-[0.4em] transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(79,70,229,0.2)] flex items-center justify-center gap-3">
                       <span className="relative z-10 flex items-center gap-3">Talk to Operator <Mic size={16} className="text-indigo-400 group-hover:animate-pulse" /></span>
-                   </button>
-                </div>
-              </section>
+                    </button>
+                  </div>
+                </section>
 
-              {/* Waitlist Section */}
-              <section id="waitlist" className="px-6 md:px-12 py-32 mb-20">
-                 <div className="bg-gradient-to-br from-indigo-700 to-indigo-900 rounded-[80px] border border-indigo-500/20 p-12 md:p-32 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
+                {/* Waitlist Section */}
+                <section id="waitlist" className="px-6 md:px-12 py-32 mb-20">
+                  <div className="bg-gradient-to-br from-indigo-700 to-indigo-900 rounded-[80px] border border-indigo-500/20 p-12 md:p-32 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-60" />
                     <div className="relative z-10 max-w-4xl mx-auto">
-                                        <h2 className="text-4xl md:text-7xl font-black text-white mb-10 uppercase tracking-tighter leading-[0.8] italic">Own Your <br /> Future.</h2>
-                                        {!isSubmitted ? (
-                                           <div className="max-w-3xl mx-auto">
-                                             <form 
-                                               onSubmit={handleWaitlistSubmit} 
-                                               className="flex flex-col md:flex-row gap-4 p-4 bg-white/10 backdrop-blur-3xl rounded-[48px] border border-white/20 shadow-2xl"
-                                             >
-                                                <input 
-                                                  type="email" 
-                                                  required
-                                                  disabled={isSubmitting}
-                                                  placeholder="Enter your email address"
-                                                  value={waitlistEmail}
-                                                  onChange={(e) => setWaitlistEmail(e.target.value)}
-                                                  className="flex-1 bg-transparent border-none py-6 px-10 text-white placeholder:text-indigo-300 font-bold text-xl outline-none focus:ring-0 disabled:opacity-50"
-                                                />
-                                                <button 
-                                                  type="submit" 
-                                                  disabled={isSubmitting}
-                                                  className="bg-white text-indigo-700 px-16 py-6 rounded-[40px] font-black text-sm uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-4 active:scale-95 disabled:opacity-50"
-                                                >
-                                                  {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : 'Join the Waitlist'} 
-                                                  {!isSubmitting && <ChevronRight size={20} />}
-                                                </button>
-                                             </form>
-                                             {errorMessage && (
-                                               <div className="mt-6 flex items-center justify-center gap-2 text-red-400 font-bold uppercase tracking-widest text-xs italic bg-red-400/10 py-3 px-6 rounded-2xl border border-red-400/20">
-                                                 <AlertTriangle size={14} />
-                                                 {errorMessage}
-                                               </div>
-                                             )}
-                                           </div>
-                                        ) : (                          <div className="bg-white/10 p-12 rounded-[48px] border border-white/20 backdrop-blur-2xl text-center">
-                             <ShieldCheck size={80} className="text-emerald-400 mx-auto mb-6" />
-                             <h4 className="text-2xl md:text-4xl font-black text-white mb-4 uppercase italic">Identity Indexed.</h4>
-                             <p className="text-indigo-200 font-bold uppercase tracking-widest text-sm italic">Genesis node activation pending. Welcome to the frontier.</p>
-                          </div>
-                       )}
+                      <h2 className="text-4xl md:text-7xl font-black text-white mb-10 uppercase tracking-tighter leading-[0.8] italic">Own Your <br /> Future.</h2>
+                      {!isSubmitted ? (
+                        <div className="max-w-3xl mx-auto">
+                          <form
+                            onSubmit={handleWaitlistSubmit}
+                            className="flex flex-col md:flex-row gap-4 p-4 bg-white/10 backdrop-blur-3xl rounded-[48px] border border-white/20 shadow-2xl"
+                          >
+                            <input
+                              type="email"
+                              required
+                              disabled={isSubmitting}
+                              placeholder="Enter your email address"
+                              value={waitlistEmail}
+                              onChange={(e) => setWaitlistEmail(e.target.value)}
+                              className="flex-1 bg-transparent border-none py-6 px-10 text-white placeholder:text-indigo-300 font-bold text-xl outline-none focus:ring-0 disabled:opacity-50"
+                            />
+                            <button
+                              type="submit"
+                              disabled={isSubmitting}
+                              className="bg-white text-indigo-700 px-16 py-6 rounded-[40px] font-black text-sm uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-4 active:scale-95 disabled:opacity-50"
+                            >
+                              {isSubmitting ? <Loader2 className="animate-spin" size={20} /> : 'Join the Waitlist'}
+                              {!isSubmitting && <ChevronRight size={20} />}
+                            </button>
+                          </form>
+                          {errorMessage && (
+                            <div className="mt-6 flex items-center justify-center gap-2 text-red-400 font-bold uppercase tracking-widest text-xs italic bg-red-400/10 py-3 px-6 rounded-2xl border border-red-400/20">
+                              <AlertTriangle size={14} />
+                              {errorMessage}
+                            </div>
+                          )}
+                        </div>
+                      ) : (<div className="bg-white/10 p-12 rounded-[48px] border border-white/20 backdrop-blur-2xl text-center">
+                        <ShieldCheck size={80} className="text-emerald-400 mx-auto mb-6" />
+                        <h4 className="text-2xl md:text-4xl font-black text-white mb-4 uppercase italic">Identity Indexed.</h4>
+                        <p className="text-indigo-200 font-bold uppercase tracking-widest text-sm italic">Genesis node activation pending. Welcome to the frontier.</p>
+                      </div>
+                      )}
                     </div>
-                 </div>
-              </section>
-            </motion.div>
-          )}
-
-          {activeView === 'platform-vision' && (
-            <motion.div
-              key="vision"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="p-12 md:p-24 max-w-6xl"
-            >
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12 italic">Platform Vision.</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
-                <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-10 rounded-[48px] backdrop-blur-xl">
-                  <div className="bg-indigo-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
-                    <Activity size={24} />
                   </div>
-                  <h3 className="text-2xl font-black uppercase mb-4 italic tracking-tight">Life Performance Engineering</h3>
-                  <p className="text-slate-400 leading-relaxed font-medium italic">
-                    Assistant, PHD applies high-performance engineering principles to your daily habits. By measuring what actually matters and automating the mundane, we help you achieve peak consistency. It’s about building a "fail-safe" routine where your health, wealth, and work goals are architected for success.
-                  </p>
-                </div>
+                </section>
+              </motion.div>
+            )}
 
-                <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-10 rounded-[48px] backdrop-blur-xl">
-                  <div className="bg-purple-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
-                    <ShieldCheck size={24} />
+            {activeView === 'platform-vision' && (
+              <motion.div
+                key="vision"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="p-12 md:p-24 max-w-6xl"
+              >
+                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12 italic">Platform Vision.</h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
+                  <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-10 rounded-[48px] backdrop-blur-xl">
+                    <div className="bg-indigo-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
+                      <Activity size={24} />
+                    </div>
+                    <h3 className="text-2xl font-black uppercase mb-4 italic tracking-tight">Life Performance Engineering</h3>
+                    <p className="text-slate-400 leading-relaxed font-medium italic">
+                      Assistant, PHD applies high-performance engineering principles to your daily habits. By measuring what actually matters and automating the mundane, we help you achieve peak consistency. It’s about building a "fail-safe" routine where your health, wealth, and work goals are architected for success.
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-black uppercase mb-4 italic tracking-tight">Private Sovereignty</h3>
-                  <p className="text-slate-400 leading-relaxed font-medium italic">
-                    Your data is your most valuable asset. Assistant-PHD ensures total sovereignty through local-first intelligence and end-to-end encrypted sync. No third parties, no tracking, just your mind, amplified.
-                  </p>
-                </div>
-              </div>
 
-              <div className="space-y-16">
-                <div>
-                  <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">Strategic Roadmap</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[40px] hover:bg-white/10 transition-all">
-                      <div className="bg-indigo-600/20 text-indigo-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
-                        <Users size={24} />
-                      </div>
-                      <h5 className="font-black uppercase text-xl italic mb-4">Collaborative Intelligence</h5>
-                      <p className="text-slate-500 font-medium italic mb-6">
-                        Securely bridge your Assistant, PhD with your trusted circle. Whether it's family scheduling, team project management, or co-founder strategy, our Agent-to-Agent (A2A) protocol allows for seamless, private collaboration without compromising your individual sovereignty.
-                      </p>
-                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-indigo-400">
-                        <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
-                        In Development
-                      </div>
+                  <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-10 rounded-[48px] backdrop-blur-xl">
+                    <div className="bg-purple-600 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
+                      <ShieldCheck size={24} />
                     </div>
-
-                    <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[40px] hover:bg-white/10 transition-all">
-                      <div className="bg-emerald-600/20 text-emerald-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
-                        <Wallet size={24} />
-                      </div>
-                      <h5 className="font-black uppercase text-xl italic mb-4">The Multi-Token Economy</h5>
-                      <p className="text-slate-500 font-medium italic mb-6">
-                        Empower your agent to execute authorized commerce. Using $PHD, $AST, $ASS and stable tokens, Assistant, PhD can manage subscriptions, hire specialist agents, or even procure real-world services through our A2H (Agent-to-Human) marketplace.
-                      </p>
-                      <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-emerald-400">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        Beta Phase
-                      </div>
-                    </div>
+                    <h3 className="text-2xl font-black uppercase mb-4 italic tracking-tight">Private Sovereignty</h3>
+                    <p className="text-slate-400 leading-relaxed font-medium italic">
+                      Your data is your most valuable asset. Assistant-PHD ensures total sovereignty through local-first intelligence and end-to-end encrypted sync. No third parties, no tracking, just your mind, amplified.
+                    </p>
                   </div>
                 </div>
 
-                <div>
-                  <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">The Three Tracks</h4>
+                <div className="space-y-16">
+                  <div>
+                    <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">Strategic Roadmap</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[40px] hover:bg-white/10 transition-all">
+                        <div className="bg-indigo-600/20 text-indigo-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
+                          <Users size={24} />
+                        </div>
+                        <h5 className="font-black uppercase text-xl italic mb-4">Collaborative Intelligence</h5>
+                        <p className="text-slate-500 font-medium italic mb-6">
+                          Securely bridge your Assistant, PhD with your trusted circle. Whether it's family scheduling, team project management, or co-founder strategy, our Agent-to-Agent (A2A) protocol allows for seamless, private collaboration without compromising your individual sovereignty.
+                        </p>
+                        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-indigo-400">
+                          <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                          In Development
+                        </div>
+                      </div>
+
+                      <div className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[40px] hover:bg-white/10 transition-all">
+                        <div className="bg-emerald-600/20 text-emerald-400 w-12 h-12 rounded-2xl flex items-center justify-center mb-6">
+                          <Wallet size={24} />
+                        </div>
+                        <h5 className="font-black uppercase text-xl italic mb-4">The Multi-Token Economy</h5>
+                        <p className="text-slate-500 font-medium italic mb-6">
+                          Empower your agent to execute authorized commerce. Using $PHD, $AST, $ASS and stable tokens, Assistant, PhD can manage subscriptions, hire specialist agents, or even procure real-world services through our A2H (Agent-to-Human) marketplace.
+                        </p>
+                        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          Beta Phase
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">The Three Tracks</h4>
+                    {[
+                      { title: "Personal Homework Dashboard", target: "Students & Teens", desc: "A command center for academic excellence. Streamlined assignments, AI study partners, and career pathing." },
+                      { title: "Professional Help & Development", target: "Career Growth", desc: "The executive assistant for the modern professional. High-performance observability for projects, networking, and skill acquisition." },
+                      { title: "Productivity, Habits, & Discipline", target: "The Optimization Track", desc: "Refining the human algorithm. Mastering the daily loops that lead to long-term wealth, health, and success." }
+                    ].map((track, i) => (
+                      <div key={i} className="flex gap-8 p-8 border-b border-white/5 items-center group hover:bg-white/5 transition-all rounded-3xl">
+                        <span className="text-4xl font-black text-slate-800 transition-colors">0{i + 1}</span>
+                        <div>
+                          <h5 className="font-black uppercase text-xl italic tracking-tight">{track.title}</h5>
+                          <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-2 block">{track.target}</span>
+                          <p className="text-slate-500 font-medium italic">{track.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">Master Domains Preview</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                      {["Home Ops", "Wealth", "Vitality", "Growth", "Expedition", "Culture"].map((domain) => (
+                        <div key={domain} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-6 rounded-3xl text-center group hover:border-indigo-500/50 transition-all">
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-white transition-colors">{domain}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeView === 'user-integrations' && (
+              <motion.div
+                key="user-integrations"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="p-12 md:p-24 max-w-6xl"
+              >
+                <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">Connections.</h2>
+                <p className="text-slate-400 text-xl font-medium italic mb-16">Securely connect your personal data sources and communication channels.</p>
+
+                <div className="space-y-16">
                   {[
-                    { title: "Personal Homework Dashboard", target: "Students & Teens", desc: "A command center for academic excellence. Streamlined assignments, AI study partners, and career pathing." },
-                    { title: "Professional Help & Development", target: "Career Growth", desc: "The executive assistant for the modern professional. High-performance observability for projects, networking, and skill acquisition." },
-                    { title: "Productivity, Habits, & Discipline", target: "The Optimization Track", desc: "Refining the human algorithm. Mastering the daily loops that lead to long-term wealth, health, and success." }
-                  ].map((track, i) => (
-                    <div key={i} className="flex gap-8 p-8 border-b border-white/5 items-center group hover:bg-white/5 transition-all rounded-3xl">
-                      <span className="text-4xl font-black text-slate-800 transition-colors">0{i+1}</span>
-                      <div>
-                        <h5 className="font-black uppercase text-xl italic tracking-tight">{track.title}</h5>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 mb-2 block">{track.target}</span>
-                        <p className="text-slate-500 font-medium italic">{track.desc}</p>
+                    {
+                      category: "Communication",
+                      items: [
+                        { name: "Telegram", icon: <Send size={24} />, status: "connected", color: "text-sky-400" },
+                        { name: "WhatsApp", icon: <MessageCircle size={24} />, status: "connected", color: "text-emerald-500" },
+                        { name: "Slack", icon: <Slack size={24} />, status: "planned", color: "text-purple-400" },
+                        { name: "Google Chat", icon: <MessageCircle size={24} />, status: "planned", color: "text-blue-400" },
+                        { name: "Discord", icon: <MessageCircle size={24} />, status: "planned", color: "text-indigo-400" },
+                      ]
+                    },
+                    {
+                      category: "Productivity",
+                      items: [
+                        { name: "Google Drive", icon: <HardDrive size={24} />, status: "planned", color: "text-yellow-500" },
+                        { name: "Gmail", icon: <Mail size={24} />, status: "planned", color: "text-red-400" },
+                        { name: "YouTube Music", icon: <Youtube size={24} />, status: "planned", color: "text-red-600" },
+                        { name: "GitHub", icon: <Github size={24} />, status: "planned", color: "text-slate-100" },
+                        { name: "Notion", icon: <Share size={24} />, status: "planned", color: "text-slate-100" },
+                      ]
+                    },
+                    {
+                      category: "Life & Performance",
+                      items: [
+                        { name: "Google Calendar", icon: <Calendar size={24} />, status: "planned", color: "text-blue-400" },
+                        { name: "Apple Health", icon: <Activity size={24} />, status: "planned", color: "text-pink-500" },
+                        { name: "Samsung Health", icon: <Activity size={24} />, status: "planned", color: "text-orange-500" },
+                        { name: "Spotify", icon: <Music size={24} />, status: "planned", color: "text-emerald-400" },
+                      ]
+                    }
+                  ].map((group) => (
+                    <div key={group.category} className="space-y-8">
+                      <h3 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 opacity-70 border-b border-white/5 pb-4">{group.category}</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {group.items.map((item) => (
+                          <div key={item.name} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
+                            <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform`}>
+                              {item.icon}
+                            </div>
+                            <h4 className="font-bold uppercase tracking-tight mb-6">{item.name}</h4>
+
+                            <div className="mt-auto w-full space-y-4">
+                              <div className="flex items-center justify-center gap-2">
+                                <div className={`w-2 h-2 rounded-full ${item.status === 'connected'
+                                  ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]'
+                                  : item.status === 'planned'
+                                    ? 'bg-yellow-500'
+                                    : 'bg-red-500'
+                                  }`} />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                  {item.status}
+                                </span>
+                              </div>
+
+                              <button className={`w-full py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all ${item.status === 'connected'
+                                ? 'bg-white/5 text-slate-400 hover:bg-red-500/10 hover:text-red-400'
+                                : 'bg-indigo-600 text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/20'
+                                }`}>
+                                {item.status === 'connected' ? 'Disconnect' : 'Connect'}
+                              </button>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   ))}
                 </div>
+              </motion.div>
+            )}
 
-                <div>
-                  <h4 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 mb-8 border-b border-white/5 pb-4">Master Domains Preview</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {["Home Ops", "Wealth", "Vitality", "Growth", "Expedition", "Culture"].map((domain) => (
-                      <div key={domain} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-6 rounded-3xl text-center group hover:border-indigo-500/50 transition-all">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-500 group-hover:text-white transition-colors">{domain}</span>
+            {activeView === 'platform-integrations' && (
+              <motion.div
+                key="platform-integrations"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="p-12 md:p-24 max-w-6xl"
+              >
+                <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">System.</h2>
+                <p className="text-slate-400 text-xl font-medium italic mb-16">The core infrastructure and frontier models powering Assistant, PhD.</p>
+
+                <div className="space-y-16">
+                  {[
+                    {
+                      category: "Intelligence Layers",
+                      items: [
+                        { name: "Google AI", icon: <Brain size={24} />, status: "operational", color: "text-blue-400" },
+                        { name: "Groq", icon: <Cpu size={24} />, status: "planned", color: "text-orange-400" },
+                        { name: "Claude Code", icon: <Terminal size={24} />, status: "planned", color: "text-orange-500" },
+                        { name: "Hugging Face", icon: <Share size={24} />, status: "planned", color: "text-yellow-400" },
+                        { name: "X.AI", icon: <Zap size={24} />, status: "planned", color: "text-indigo-400" },
+                      ]
+                    },
+                    {
+                      category: "Processing & Storage",
+                      items: [
+                        { name: "Cloud Run", icon: <Server size={24} />, status: "operational", color: "text-blue-500" },
+                        { name: "Firestore", icon: <Database size={24} />, status: "operational", color: "text-orange-500" },
+                        { name: "Vector Vault", icon: <ShieldCheck size={24} />, status: "planned", color: "text-emerald-500" },
+                      ]
+                    }
+                  ].map((group) => (
+                    <div key={group.category} className="space-y-8">
+                      <h3 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 opacity-70 border-b border-white/5 pb-4">{group.category}</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {group.items.map((item) => (
+                          <div key={item.name} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
+                            <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform`}>
+                              {item.icon}
+                            </div>
+                            <h4 className="font-bold uppercase tracking-tight mb-6">{item.name}</h4>
+
+                            <div className="mt-auto w-full space-y-4">
+                              <div className="flex items-center justify-center gap-2">
+                                <div className={`w-2 h-2 rounded-full ${item.status === 'operational' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' : 'bg-yellow-500'}`} />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                  {item.status}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {activeView === 'projects' && (
+              <motion.div
+                key="projects"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="p-12 md:p-24 max-w-6xl w-full"
+              >
+                <div className="flex items-center justify-between gap-4 mb-4">
+                  <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic">Projects.</h2>
+                  <div className="flex items-center gap-4">
+                    <button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
+                      <Plus size={14} /> New Project
+                    </button>
+                    <div className="hidden sm:flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-400">
+                      <ArrowDownUp size={14} /> Sort:
+                      <select
+                        className="bg-transparent text-white outline-none ml-2 uppercase"
+                        value={projectSortSelect}
+                        onChange={(e) => setProjectSortSelect(e.target.value as any)}
+                      >
+                        <option value="priority" className="bg-slate-900">Priority</option>
+                        <option value="name" className="bg-slate-900">Name</option>
+                        <option value="tag" className="bg-slate-900">Tags</option>
+                        <option value="custom" className="bg-slate-900">Custom</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
+                <p className="text-slate-400 text-xl font-medium italic mb-12">Select an initialized repository to manage operations.</p>
 
-          {activeView === 'user-integrations' && (
-            <motion.div
-              key="user-integrations"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="p-12 md:p-24 max-w-6xl"
-            >
-              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">Connections.</h2>
-              <p className="text-slate-400 text-xl font-medium italic mb-16">Securely connect your personal data sources and communication channels.</p>
-
-              <div className="space-y-16">
-                {[
-                  {
-                    category: "Communication",
-                    items: [
-                      { name: "Telegram", icon: <Send size={24} />, status: "connected", color: "text-sky-400" },
-                      { name: "WhatsApp", icon: <MessageCircle size={24} />, status: "connected", color: "text-emerald-500" },
-                      { name: "Slack", icon: <Slack size={24} />, status: "planned", color: "text-purple-400" },
-                      { name: "Google Chat", icon: <MessageCircle size={24} />, status: "planned", color: "text-blue-400" },
-                      { name: "Discord", icon: <MessageCircle size={24} />, status: "planned", color: "text-indigo-400" },
-                    ]
-                  },
-                  {
-                    category: "Productivity",
-                    items: [
-                      { name: "Google Drive", icon: <HardDrive size={24} />, status: "planned", color: "text-yellow-500" },
-                      { name: "Gmail", icon: <Mail size={24} />, status: "planned", color: "text-red-400" },
-                      { name: "YouTube Music", icon: <Youtube size={24} />, status: "planned", color: "text-red-600" },
-                      { name: "GitHub", icon: <Github size={24} />, status: "planned", color: "text-slate-100" },
-                      { name: "Notion", icon: <Share size={24} />, status: "planned", color: "text-slate-100" },
-                    ]
-                  },
-                  {
-                    category: "Life & Performance",
-                    items: [
-                      { name: "Google Calendar", icon: <Calendar size={24} />, status: "planned", color: "text-blue-400" },
-                      { name: "Apple Health", icon: <Activity size={24} />, status: "planned", color: "text-pink-500" },
-                      { name: "Samsung Health", icon: <Activity size={24} />, status: "planned", color: "text-orange-500" },
-                      { name: "Spotify", icon: <Music size={24} />, status: "planned", color: "text-emerald-400" },
-                    ]
-                  }
-                ].map((group) => (
-                  <div key={group.category} className="space-y-8">
-                    <h3 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 opacity-70 border-b border-white/5 pb-4">{group.category}</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {group.items.map((item) => (
-                        <div key={item.name} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
-                          <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform`}>
-                            {item.icon}
-                          </div>
-                          <h4 className="font-bold uppercase tracking-tight mb-6">{item.name}</h4>
-                          
-                          <div className="mt-auto w-full space-y-4">
-                            <div className="flex items-center justify-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${
-                                item.status === 'connected' 
-                                  ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' 
-                                  : item.status === 'planned'
-                                    ? 'bg-yellow-500'
-                                    : 'bg-red-500'
-                              }`} />
-                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-                                {item.status}
-                              </span>
-                            </div>
-                            
-                            <button className={`w-full py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all ${
-                              item.status === 'connected' 
-                                ? 'bg-white/5 text-slate-400 hover:bg-red-500/10 hover:text-red-400' 
-                                : 'bg-indigo-600 text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/20'
-                            }`}>
-                              {item.status === 'connected' ? 'Disconnect' : 'Connect'}
-                            </button>
-                          </div>
+                <div className="flex flex-col gap-6">
+                  {projects.map(proj => ({
+                    ...proj,
+                    maxPrio: Math.max(0, ...proj.tasks.map(t => t.priority)),
+                    primaryTag: proj.tags[0] || 'Misc'
+                  })).sort((a, b) => {
+                    if (projectSortSelect === 'priority') return b.maxPrio - a.maxPrio;
+                    if (projectSortSelect === 'tag') return a.primaryTag.localeCompare(b.primaryTag);
+                    if (projectSortSelect === 'custom') return 0; // Default rendering order allows drag mock
+                    return a.name.localeCompare(b.name);
+                  }).map((proj) => (
+                    <div key={proj.id} className="glass-panel p-8 rounded-[32px] hover:border-indigo-500/50 duration-500 flex gap-4">
+                      {projectSortSelect === 'custom' && (
+                        <div className="flex flex-col items-center justify-center gap-2 pr-4 border-r border-white/5 text-slate-600">
+                          <ArrowDownUp size={16} className="hover:text-white cursor-grab" />
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
+                      )}
 
-          {activeView === 'platform-integrations' && (
-            <motion.div
-              key="platform-integrations"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="p-12 md:p-24 max-w-6xl"
-            >
-              <h2 className="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">System.</h2>
-              <p className="text-slate-400 text-xl font-medium italic mb-16">The core infrastructure and frontier models powering Assistant, PhD.</p>
-
-              <div className="space-y-16">
-                {[
-                  {
-                    category: "Intelligence Layers",
-                    items: [
-                      { name: "Google AI", icon: <Brain size={24} />, status: "operational", color: "text-blue-400" },
-                      { name: "Groq", icon: <Cpu size={24} />, status: "planned", color: "text-orange-400" },
-                      { name: "Claude Code", icon: <Terminal size={24} />, status: "planned", color: "text-orange-500" },
-                      { name: "Hugging Face", icon: <Share size={24} />, status: "planned", color: "text-yellow-400" },
-                      { name: "X.AI", icon: <Zap size={24} />, status: "planned", color: "text-indigo-400" },
-                    ]
-                  },
-                  {
-                    category: "Processing & Storage",
-                    items: [
-                      { name: "Cloud Run", icon: <Server size={24} />, status: "operational", color: "text-blue-500" },
-                      { name: "Firestore", icon: <Database size={24} />, status: "operational", color: "text-orange-500" },
-                      { name: "Vector Vault", icon: <ShieldCheck size={24} />, status: "planned", color: "text-emerald-500" },
-                    ]
-                  }
-                ].map((group) => (
-                  <div key={group.category} className="space-y-8">
-                    <h3 className="text-sm font-black uppercase tracking-[0.4em] text-indigo-400 opacity-70 border-b border-white/5 pb-4">{group.category}</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {group.items.map((item) => (
-                        <div key={item.name} className="glass-panel hover:-translate-y-2 hover:border-indigo-500/30 hover:shadow-[0_12px_40px_-10px_rgba(79,70,229,0.3)] duration-500 p-8 rounded-[32px] backdrop-blur-xl group hover:bg-white/10 transition-all flex flex-col items-center text-center">
-                          <div className={`${item.color} mb-6 transform group-hover:scale-110 transition-transform`}>
-                            {item.icon}
-                          </div>
-                          <h4 className="font-bold uppercase tracking-tight mb-6">{item.name}</h4>
-                          
-                          <div className="mt-auto w-full space-y-4">
-                            <div className="flex items-center justify-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${item.status === 'operational' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' : 'bg-yellow-500'}`} />
-                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-                                {item.status}
-                              </span>
+                      <div className="w-full">
+                        {/* Project Header */}
+                        <div
+                          onClick={() => setSelectedProject(selectedProject === proj.id ? null : proj.id)}
+                          className="group flex flex-col md:flex-row justify-between items-start md:items-center cursor-pointer gap-6"
+                        >
+                          <div className="flex gap-6 items-center w-full md:w-auto">
+                            <div className="bg-indigo-600/20 text-indigo-400 w-12 h-12 rounded-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform shrink-0">
+                              <FolderKey size={24} />
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-3">
+                                <h3 className="text-xl md:text-2xl font-black uppercase italic tracking-tight">{proj.name}</h3>
+                                <span className="bg-orange-500/20 border border-orange-500/50 text-orange-400 px-2 py-0.5 rounded text-[8px] font-black tracking-widest uppercase">
+                                  Prio {proj.maxPrio}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{proj.meta}</span>
+                                <div className="flex gap-2">
+                                  {proj.tags.map(tag => (
+                                    <span key={tag} className="text-[8px] px-1.5 rounded-sm bg-white/5 text-indigo-300 uppercase tracking-widest">{tag}</span>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
                           </div>
+                          <div className="flex items-center gap-2 self-start md:self-auto bg-white/5 px-4 py-2 rounded-xl group-hover:bg-white/10 transition-colors">
+                            <span className="text-[9px] font-black tracking-widest text-indigo-400 uppercase">
+                              {selectedProject === proj.id ? 'Hide Tasks' : 'View Tasks'}
+                            </span>
+                            <ChevronRight size={16} className={`text-slate-600 group-hover:text-indigo-400 transition-all duration-300 ${selectedProject === proj.id ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+                          </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
 
-          {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && (
-            <motion.div
-              key="placeholder"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex flex-col items-center justify-center min-h-[80vh] text-center px-6"
-            >
-              <Loader2 size={48} className="text-indigo-500 animate-spin mb-6" />
-              <h2 className="text-4xl font-black uppercase tracking-tighter italic mb-4">{activeView} System Initializing</h2>
-              <p className="text-slate-500 font-medium italic mb-10">The Possibility Engine is architecting this module. <br /> Check back as the roadmap unfolds.</p>
-              
-              <div className="flex flex-col items-center gap-4">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">Want early access?</span>
-                <a 
-                  href="#waitlist" 
-                  onClick={() => setActiveView('home')}
-                  className="bg-white/5 hover:bg-white/10 text-white px-10 py-5 rounded-[32px] font-black text-[10px] uppercase tracking-[0.4em] backdrop-blur-md border border-white/10 transition-all hover:scale-105"
-                >
-                  Join the Wishlist
-                </a>
-              </div>
-            </motion.div>
-          )}
+                        {/* Dropdown Tasks List */}
+                        <AnimatePresence>
+                          {selectedProject === proj.id && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                              animate={{ height: 'auto', opacity: 1, marginTop: 24 }}
+                              exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="border-t border-white/10 pt-6">
+                                <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
+                                  <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                    <span>Sort Tasks:</span>
+                                    <select
+                                      className="bg-transparent text-white outline-none hover:bg-white/5 px-2 py-1 rounded"
+                                      value={taskSortSelect}
+                                      onChange={(e) => setTaskSortSelect(e.target.value as any)}
+                                    >
+                                      <option value="priority" className="bg-slate-900">Priority</option>
+                                      <option value="name" className="bg-slate-900">Name</option>
+                                      <option value="tag" className="bg-slate-900">Tag</option>
+                                      <option value="custom" className="bg-slate-900">Custom</option>
+                                    </select>
+                                  </div>
+                                  <button className="flex items-center gap-1 text-indigo-400 hover:text-indigo-300 text-[9px] font-black uppercase tracking-widest">
+                                    <Plus size={12} /> Add Task
+                                  </button>
+                                </div>
+                                <div className="max-h-[600px] overflow-y-auto custom-scrollbar pr-2 space-y-3">
+                                  {[...proj.tasks].sort((a, b) => {
+                                    if (taskSortSelect === 'priority') return b.priority - a.priority;
+                                    if (taskSortSelect === 'tag') return a.tag.localeCompare(b.tag);
+                                    if (taskSortSelect === 'custom') return 0;
+                                    return a.title.localeCompare(b.title);
+                                  }).map((task) => (
+                                    <div
+                                      key={task.id}
+                                      className={`p-5 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 transition-all duration-1000 group ${changedTaskIds.includes(task.id) ? 'bg-indigo-500/30 border border-indigo-500 shadow-[0_0_20px_rgba(79,70,229,0.5)]' : 'bg-slate-950/50 hover:bg-white/5 border border-white/5'}`}
+                                    >
+                                      <div className="flex items-center gap-4">
+                                        {taskSortSelect === 'custom' && (
+                                          <div className="flex flex-col items-center justify-center pr-2 border-r border-white/5 text-slate-600">
+                                            <ArrowDownUp size={12} className="hover:text-white cursor-grab" />
+                                          </div>
+                                        )}
+                                        <div className="w-5 h-5 shrink-0 rounded-full border border-white/20 flex items-center justify-center text-transparent hover:text-emerald-400 hover:border-emerald-400 cursor-pointer transition-colors">
+                                          <Check size={10} />
+                                        </div>
+                                        <div>
+                                          <h4 className="font-bold text-slate-200 leading-tight">{task.title}</h4>
+                                          <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">ID: {task.id}</span>
+                                        </div>
+                                      </div>
+
+                                      <div className="flex items-center gap-3 ml-9 sm:ml-0 shrink-0">
+                                        <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-[9px] font-black uppercase tracking-widest text-indigo-300">
+                                          {task.tag}
+                                        </span>
+                                        <div className={`px-3 py-1.5 rounded-xl border flex items-center gap-2 transition-all duration-1000 ${changedTaskIds.includes(task.id) ? 'bg-indigo-600 border-indigo-400 text-white shadow-[0_0_15px_rgba(79,70,229,0.8)]' : 'bg-slate-900 border-white/10'}`}>
+                                          <span className="text-[8px] font-black uppercase tracking-widest text-slate-500">Prio</span>
+                                          <span className="text-xs font-black text-white">{task.priority}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {activeView !== 'home' && activeView !== 'platform-vision' && activeView !== 'user-integrations' && activeView !== 'platform-integrations' && activeView !== 'projects' && (
+              <motion.div
+                key="placeholder"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex flex-col items-center justify-center min-h-[80vh] text-center px-6"
+              >
+                <Loader2 size={48} className="text-indigo-500 animate-spin mb-6" />
+                <h2 className="text-4xl font-black uppercase tracking-tighter italic mb-4">{activeView} System Initializing</h2>
+                <p className="text-slate-500 font-medium italic mb-10">The Possibility Engine is architecting this module. <br /> Check back as the roadmap unfolds.</p>
+
+                <div className="flex flex-col items-center gap-4">
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">Want early access?</span>
+                  <a
+                    href="#waitlist"
+                    onClick={() => setActiveView('home')}
+                    className="bg-white/5 hover:bg-white/10 text-white px-10 py-5 rounded-[32px] font-black text-[10px] uppercase tracking-[0.4em] backdrop-blur-md border border-white/10 transition-all hover:scale-105"
+                  >
+                    Join the Wishlist
+                  </a>
+                </div>
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
       </main>
@@ -647,14 +902,13 @@ const App = () => {
             <div className="flex-1 p-8 overflow-y-auto space-y-6 custom-scrollbar bg-slate-900/50 flex flex-col">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                   <div className={`max-w-[85%] p-5 rounded-[32px] text-sm font-medium leading-relaxed ${
-                     msg.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-white/5 text-slate-300 border border-white/5 rounded-tl-none italic'
-                   }`}>
-                     <div className="whitespace-pre-wrap">{msg.content}</div>
-                   </div>
+                  <div className={`max-w-[85%] p-5 rounded-[32px] text-sm font-medium leading-relaxed ${msg.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-white/5 text-slate-300 border border-white/5 rounded-tl-none italic'
+                    }`}>
+                    <div className="whitespace-pre-wrap">{msg.content}</div>
+                  </div>
                 </div>
               ))}
-              {isTyping && <div className="flex gap-1 p-4"><div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce"/><div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce delay-100"/><div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce delay-200"/></div>}
+              {isTyping && <div className="flex gap-1 p-4"><div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce" /><div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce delay-100" /><div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce delay-200" /></div>}
               <div ref={chatEndRef} />
             </div>
             <form onSubmit={handleSendMessage} className="p-10 bg-slate-950 border-t border-white/5">
@@ -666,12 +920,12 @@ const App = () => {
           </div>
         ) : (
           <button onClick={() => setIsChatOpen(true)} className="group relative bg-slate-950 hover:bg-indigo-600 text-white p-7 rounded-[35px] shadow-2xl border border-white/5 transition-all overflow-hidden">
-             <MessageSquare size={32} className="relative z-10 text-indigo-400" />
-             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <MessageSquare size={32} className="relative z-10 text-indigo-400" />
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
         )}
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
